@@ -31,7 +31,7 @@ public class ContagiousBoard extends VBox implements View {
             this.getChildren().addAll(this.counterLabel, this.pane);
             this.getScene().getWindow().sizeToScene();
 
-            world.start(10);
+            world.start(4);
         });
     }
 
@@ -44,7 +44,10 @@ public class ContagiousBoard extends VBox implements View {
     public void updatePosition(int dx, int dy, int i) {
         Platform.runLater( () -> {
             pane.updatePosition(dx, dy);
+            System.out.println(dx);
+            System.out.println(dy);
             System.out.println(i);
+            System.out.println();
             this.counterLabel.setText("" + i);
         });
     }
