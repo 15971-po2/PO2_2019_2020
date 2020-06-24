@@ -16,8 +16,6 @@ public class WorldBoard extends Pane {
     private final int nLinesPane;
     private final int nColsPane;
 
-    private Rectangle[][] rectangles;
-
     private Rectangle rectangle;
 
     public WorldBoard(World world, int size) {
@@ -27,7 +25,6 @@ public class WorldBoard extends Pane {
         this.setPrefSize(this.nLinesPane, this.nColsPane);
 
         this.rectangle = null;
-        this.rectangles = null;
 
     }
 
@@ -54,7 +51,7 @@ public class WorldBoard extends Pane {
 
         Rectangle r = new Rectangle(col, line, CELL_SIZE, CELL_SIZE);
 
-        r.setFill(Color.RED);
+        r.setFill(Color.BLUE);
         Platform.runLater( () -> {
             this.getChildren().add(r);
         });

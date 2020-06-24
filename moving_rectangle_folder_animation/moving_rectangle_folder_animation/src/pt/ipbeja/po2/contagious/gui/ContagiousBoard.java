@@ -6,10 +6,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import pt.ipbeja.po2.contagious.model.CellPosition;
 import pt.ipbeja.po2.contagious.model.View;
-import pt.ipbeja.po2.contagious.model.WorldWithOneCell;
+import pt.ipbeja.po2.contagious.model.World;
 
 public class ContagiousBoard extends VBox implements View {
-    public static WorldWithOneCell world;
+    public static World world;
     private WorldBoard pane;
     private Label counterLabel;
 
@@ -22,7 +22,7 @@ public class ContagiousBoard extends VBox implements View {
         this.getChildren().add(startButton);
 
         startButton.setOnMouseClicked((e) -> {
-            world = new WorldWithOneCell(this, 100, 100);
+            world = new World(this, 50, 50, 15, 2);
             this.pane = new WorldBoard(this.world, 10);
             this.counterLabel = new Label(("0"));
             this.counterLabel.setPrefWidth(pane.getPrefWidth());
@@ -41,10 +41,18 @@ public class ContagiousBoard extends VBox implements View {
     }
 
     @Override
+    public void addPerson(CellPosition position) {
+        pane.addPerson(position);
+    }
+
+    @Override
     public void updatePosition(int dx, int dy, int i) {
         Platform.runLater( () -> {
             pane.updatePosition(dx, dy);
+            System.out.println(dx);
+            System.out.println(dy);
             System.out.println(i);
+            System.out.println();
             this.counterLabel.setText("" + i);
         });
     }

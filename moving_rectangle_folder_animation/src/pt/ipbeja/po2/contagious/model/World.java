@@ -7,7 +7,6 @@ public class World {
 
     private View view;
     private Cell cell;
-    private Cell[][] cells;
     private final int nLines;
     private final int nCols;
 
@@ -20,27 +19,12 @@ public class World {
                 this.nCols / 2));
     }
 
-    /**
-     * Creates the game board by populating each Place with an EMPTY value
-     */
-    private void fillBoard() {
-        for (int i = 0; i < this.nLines; i++) {
-            for (int j = 0; j < this.nCols; j++) {
-                Cell cell = new HealthyPerson();
-                this.cells[i][j] = cell;
-            }
-        }
-    }
-
     public void start(int nPersons) {
-        for (int i = 0; i < nPersons; i++) {
             new Thread( () -> {
                 this.populate();
-                this.simulate(10);
+                this.simulate(200);
 
             }).start();
-        }
-
     }
 
     public int nLines() {

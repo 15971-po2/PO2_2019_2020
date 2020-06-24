@@ -7,7 +7,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import pt.ipbeja.po2.contagious.model.CellPosition;
-import pt.ipbeja.po2.contagious.model.WorldWithOneCell;
+import pt.ipbeja.po2.contagious.model.World;
 
 public class WorldBoard extends Pane {
 
@@ -16,20 +16,27 @@ public class WorldBoard extends Pane {
     private final int nLinesPane;
     private final int nColsPane;
 
+    private Rectangle[][] rectangles;
+
     private Rectangle rectangle;
 
-    public WorldBoard(WorldWithOneCell world, int size) {
+    public WorldBoard(World world, int size) {
         this.CELL_SIZE = size;
         this.nLinesPane = world.nLines() * CELL_SIZE;
         this.nColsPane = world.nCols() * CELL_SIZE;
         this.setPrefSize(this.nLinesPane, this.nColsPane);
 
         this.rectangle = null;
+        this.rectangles = null;
 
     }
 
     public void populateWorld(CellPosition position) {
         this.rectangle = this.addRectangle(position);
+    }
+
+    public void addPerson(CellPosition position) {
+        this.rectangles[position.getLine()][position.getCol()] = this.addRectangle(position);
     }
 
 //    public void updatePosition(int dx, int dy) {
@@ -51,7 +58,7 @@ public class WorldBoard extends Pane {
 
         Rectangle r = new Rectangle(col, line, CELL_SIZE, CELL_SIZE);
 
-        r.setFill(Color.BLUE);
+        r.setFill(Color.RED);
         Platform.runLater( () -> {
             this.getChildren().add(r);
         });

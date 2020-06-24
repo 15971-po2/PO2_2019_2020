@@ -40,4 +40,13 @@ public class CellPosition {
     public boolean isInside(int nLines, int nCols) {
         return 0 <= this.line && this.line < nLines && 0 <= this.col && this.col < nCols;
     }
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public String toString() {
+        return "(" + line + ", " + col + ")";
+    }
 }

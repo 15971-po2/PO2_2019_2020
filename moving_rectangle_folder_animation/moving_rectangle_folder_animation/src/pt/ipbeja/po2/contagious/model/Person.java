@@ -1,6 +1,10 @@
 package pt.ipbeja.po2.contagious.model;
 
-public abstract class Person {
+public abstract class Person extends Cell {
+
+    public Person(CellPosition cellPosition) {
+        super(cellPosition);
+    }
 
     /**
      * @return true if cell is healthy, false otherwise
