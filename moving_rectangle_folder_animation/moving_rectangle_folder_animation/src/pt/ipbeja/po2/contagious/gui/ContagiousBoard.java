@@ -30,7 +30,7 @@ public class ContagiousBoard extends VBox implements View {
         this.getChildren().add(startButton);
 
         startButton.setOnMouseClicked((e) -> {
-            this.world = new World(this, 50, 50, 10, 3);
+            this.world = new World(this, 50, 50, 5, 2);
             this.pane = new WorldBoard(this.world, 10);
             this.counterLabel = new Label(("0"));
             this.counterLabel.setPrefWidth(pane.getPrefWidth());

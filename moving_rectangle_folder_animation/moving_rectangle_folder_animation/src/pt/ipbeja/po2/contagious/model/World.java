@@ -33,22 +33,26 @@ public class World {
         int healthyCounter = 0;
         int sickCounter = 0;
         int nCells = 0;
-        for (int i = 0; i < this.nLines; i++) {
-            for (int j = 0; j < this.nCols; j++) {
+        for (int line = 0; line < this.nLines; line++) {
+            for (int col = 0; col < this.nCols; col++) {
                 Cell cell = null;
-                CellPosition position = new CellPosition(i, j);
-                if (nCells % 3 == 0 && ((healthyCounter + sickCounter) < this.nPersons)) {
+                CellPosition position = new CellPosition(line, col);
+                if (nCells % 5 == 0 && ((healthyCounter + sickCounter) < this.nPersons)) {
                     if (healthyCounter < this.nHealthyPersons) {
                         cell = new HealthyPerson(position);
+                        //System.out.println(line + " " + col);
+                        //System.out.println("From position " + position.getLine() + " " + position.getCol());
                         healthyCounter++;
                     } else if (sickCounter < this.nSickPersons) {
+                        //System.out.println(line + " " + col);
+                        //System.out.println("From position " + position.getLine() + " " + position.getCol());
                         cell = new SickPerson(position);
                         sickCounter++;
                     }
                 } else {
                     cell = new EmptyCell(position);
                 }
-                this.cells[j][i] = cell;
+                this.cells[line][col] = cell;
                 nCells++;
             }
         }
@@ -64,9 +68,67 @@ public class World {
                 int m = random.nextInt(i + 1);
                 int n = random.nextInt(j + 1);
 
-                Cell temp = this.cells[i][j];
-                this.cells[j][i] = this.cells[n][m];
-                this.cells[n][m] = temp;
+                Cell oldCell = this.cells[i][j];
+                Cell newCell = this.cells[m][n];
+                if (oldCell.isHealthy()) {
+                    if (newCell.isEmpty()) {
+                        this.cells[i][j] = new EmptyCell(oldCell.cellPosition());
+                        this.cells[m][n] = new HealthyPerson(newCell.cellPosition());
+                    } else if (newCell.isHealthy()) {
+                        this.cells[i][j] = new HealthyPerson(oldCell.cellPosition());
+                        this.cells[m][n] = new HealthyPerson(newCell.cellPosition());
+                    } else if (newCell.isSick()) {
+                        this.cells[i][j] = new SickPerson(oldCell.cellPosition());
+                        this.cells[m][n] = new HealthyPerson(newCell.cellPosition());
+                    } else if (newCell.isImmune()) {
+                        this.cells[i][j] = new ImmunePerson(oldCell.cellPosition());
+                        this.cells[m][n] = new HealthyPerson(newCell.cellPosition());
+                    }
+
+                } else if (oldCell.isEmpty()) {
+                    if (newCell.isEmpty()) {
+                        this.cells[i][j] = new EmptyCell(oldCell.cellPosition());
+                        this.cells[m][n] = new EmptyCell(newCell.cellPosition());
+                    } else if (newCell.isHealthy()) {
+                        this.cells[i][j] = new HealthyPerson(oldCell.cellPosition());
+                        this.cells[m][n] = new EmptyCell(newCell.cellPosition());
+                    } else if (newCell.isSick()) {
+                        this.cells[i][j] = new SickPerson(oldCell.cellPosition());
+                        this.cells[m][n] = new EmptyCell(newCell.cellPosition());
+                    } else if (newCell.isImmune()) {
+                        this.cells[i][j] = new ImmunePerson(oldCell.cellPosition());
+                        this.cells[m][n] = new EmptyCell(newCell.cellPosition());
+                    }
+                } else if (oldCell.isSick()) {
+                    if (newCell.isEmpty()) {
+                        this.cells[i][j] = new EmptyCell(oldCell.cellPosition());
+                        this.cells[m][n] = new SickPerson(newCell.cellPosition());
+                    } else if (newCell.isHealthy()) {
+                        this.cells[i][j] = new HealthyPerson(oldCell.cellPosition());
+                        this.cells[m][n] = new SickPerson(newCell.cellPosition());
+                    } else if (newCell.isSick()) {
+                        this.cells[i][j] = new SickPerson(oldCell.cellPosition());
+                        this.cells[m][n] = new SickPerson(newCell.cellPosition());
+                    } else if (newCell.isImmune()) {
+                        this.cells[i][j] = new ImmunePerson(oldCell.cellPosition());
+                        this.cells[m][n] = new SickPerson(newCell.cellPosition());
+                    }
+                } else if (oldCell.isImmune()) {
+                    if (newCell.isEmpty()) {
+                        this.cells[i][j] = new EmptyCell(oldCell.cellPosition());
+                        this.cells[m][n] = new ImmunePerson(newCell.cellPosition());
+                    } else if (newCell.isHealthy()) {
+                        this.cells[i][j] = new HealthyPerson(oldCell.cellPosition());
+                        this.cells[m][n] = new ImmunePerson(newCell.cellPosition());
+                    } else if (newCell.isSick()) {
+                        this.cells[i][j] = new SickPerson(oldCell.cellPosition());
+                        this.cells[m][n] = new ImmunePerson(newCell.cellPosition());
+                    } else if (newCell.isImmune()) {
+                        this.cells[i][j] = new ImmunePerson(oldCell.cellPosition());
+                        this.cells[m][n] = new ImmunePerson(newCell.cellPosition());
+                    }
+                }
+
             }
         }
     }
@@ -98,21 +160,30 @@ public class World {
     public void move() {
         for (int line = 0; line < this.nLines; line++) {
             for (int col = 0; col < this.nCols; col++) {
-                Cell cell = this.cells[col][line];
+                Cell cell = this.cells[line][col];
+                //System.out.println(line + " " + col);
+                //System.out.println(this.getCell(cell.getLine(), cell.getCol()));
+                //System.out.println(this.getCell(cell.cellPosition().getLine(), cell.cellPosition().getCol()));
+                //System.out.println("From position " + cell.getLine() + " " + cell.getCol());
+                int oldLine = cell.getLine();
+                int oldCol = cell.getCol();
                 if (!cell.isEmpty()) {
-                    System.out.println(cell.getLine() + " " + cell.getCol());
-                    CellPosition position = new CellPosition(cell.cellPosition().getLine(), cell.cellPosition().getCol());
-                    System.out.println(position.getLine() + " " + position.getCol());
+                    //System.out.println(cell.getLine() + " " + cell.getCol());
+                    CellPosition position = new CellPosition(oldLine, oldCol);
+                    System.out.println("FROM " + position.getLine() + " " + position.getCol());
                     CellPosition newPosition = cell.randomMove();
-                    System.out.println(newPosition.getLine() + " " + newPosition.getCol());
-                    System.out.println();
-                    this.cells[position.getLine()][position.getCol()] = new EmptyCell(position);
+                    int newLine = newPosition.getLine();
+                    int newCol = newPosition.getCol();
+                    //System.out.println("To " + newLine + " " + newCol);
+                    System.out.println("TO " + newPosition.getLine() + " " + newPosition.getCol());
+                    //System.out.println();
+                    this.cells[oldLine][oldCol] = new EmptyCell(position);
                     if (cell.isImmune()) {
-                        this.cells[newPosition.getLine()][newPosition.getCol()] = new ImmunePerson(newPosition);
+                        this.cells[newLine][newCol] = new ImmunePerson(newPosition);
                     } else if (cell.isSick()) {
-                        this.cells[newPosition.getLine()][newPosition.getCol()] = new SickPerson(newPosition);
+                        this.cells[newLine][newCol] = new SickPerson(newPosition);
                     } else if (cell.isHealthy()) {
-                        this.cells[newPosition.getLine()][newPosition.getCol()] = new HealthyPerson(newPosition);
+                        this.cells[newLine][newCol] = new HealthyPerson(newPosition);
                     }
                     this.view.updatePosition(position, newPosition);
                 }
@@ -201,7 +272,7 @@ public class World {
     }
 
     public static Cell getCell(int line, int col) {
-        return cells[col][line];
+        return cells[line][col];
     }
 
     private void simulate(int nIter) {
