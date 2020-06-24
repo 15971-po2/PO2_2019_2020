@@ -5,5 +5,5 @@ public interface View {
 
     void addPerson(CellPosition position);
 
-    void updatePosition(int dx, int dy, int i);
+    void updatePosition(CellPosition position, CellPosition newPosition);
 }

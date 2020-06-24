@@ -14,22 +14,33 @@ public abstract class Cell {
     }
 
     public CellPosition cellPosition() {
-        return cellPosition;
+        return this.cellPosition;
     }
 
-//    public boolean randomMove() {
-//        final int[] v = {-1, 0, 1};
-//        this.dx = v[World.rand.nextInt(3)];
-//        this.dy = v[World.rand.nextInt(3)];
-//        if (dx == 0 && dy == 0) {// to force a move
-//            dx = 1;
-//        }
-//        this.cellPosition = new CellPosition(
-//                this.cellPosition.getLine() + dy,
-//                this.cellPosition.getCol() + dx);
-//
-//        return true;
-//    }
+    public CellPosition randomMove() {
+        CellPosition oldPosition = this.cellPosition;
+        final int[] v = {-1, 0, 1};
+        boolean valid = false;
+        while(!valid) {
+            int lineMove = v[World.rand.nextInt(3)];
+            int colMove = v[World.rand.nextInt(3)];
+            if (lineMove == 0 && colMove == 0) {// to force a move
+                lineMove = 1;
+            }
+            int newLine = this.line + lineMove;
+            int newCol = this.col + colMove;
+            if (World.isValid(newLine, newCol) && World.getCell(newLine, newCol).isEmpty()) {
+                //System.out.println("Old coordinates " + this.line + " " + this.col);
+                this.line = newLine;
+                this.col = newCol;
+                //System.out.println("New coordinates " + this.line + " " + this.col);
+                //System.out.println();
+                this.cellPosition = new CellPosition(newLine, newCol);
+                valid = true;
+            }
+        }
+        return this.cellPosition;
+    }
 
     public int getLine() {
         return this.line;

@@ -1,6 +1,8 @@
 package pt.ipbeja.po2.contagious.gui;
 
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
@@ -13,22 +15,28 @@ public class ContagiousBoard extends VBox implements View {
     private WorldBoard pane;
     private Label counterLabel;
 
+    private final Button newGameButton;
 
     public ContagiousBoard() {
 
         Button startButton = new Button("Start");
         startButton.setPrefWidth(200);
 
+        this.newGameButton = new Button("New Game");
+        NewGameButtonHandler handler = new NewGameButtonHandler();
+
+        this.newGameButton.setOnAction(handler);
+
         this.getChildren().add(startButton);
 
         startButton.setOnMouseClicked((e) -> {
-            world = new World(this, 50, 50, 15, 2);
+            this.world = new World(this, 50, 50, 10, 3);
             this.pane = new WorldBoard(this.world, 10);
             this.counterLabel = new Label(("0"));
             this.counterLabel.setPrefWidth(pane.getPrefWidth());
             startButton.setPrefWidth(pane.getPrefWidth());
             this.getChildren().remove(startButton);
-            this.getChildren().addAll(this.counterLabel, this.pane);
+            this.getChildren().addAll(this.newGameButton, this.pane);
             this.getScene().getWindow().sizeToScene();
 
             world.start();
@@ -46,14 +54,24 @@ public class ContagiousBoard extends VBox implements View {
     }
 
     @Override
-    public void updatePosition(int dx, int dy, int i) {
+    public void updatePosition(CellPosition position, CellPosition newPosition) {
         Platform.runLater( () -> {
-            pane.updatePosition(dx, dy);
-            System.out.println(dx);
-            System.out.println(dy);
-            System.out.println(i);
-            System.out.println();
-            this.counterLabel.setText("" + i);
+            pane.updatePosition(position, newPosition);
         });
+    }
+
+    /**
+     * Click handler for the new game button
+     */
+    class NewGameButtonHandler implements EventHandler<ActionEvent> {
+
+        @Override
+        public void handle(ActionEvent event) {
+            newGame();
+        }
+    }
+
+    private void newGame(){
+        this.world.move();
     }
 }
