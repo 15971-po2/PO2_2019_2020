@@ -23,10 +23,14 @@ public class WorldBoard extends Pane {
         this.nColsPane = world.nCols() * CELL_SIZE;
         this.setPrefSize(nLinesPane, nColsPane);
         this.rectangles = new Rectangle[world.nCols()][world.nLines()];
-
         this.fillBoard();
     }
 
+    /**
+     * Update positions
+     * @param position - position to be removed
+     * @param newPosition - position to move
+     */
     public void updatePosition(CellPosition position, CellPosition newPosition) {
         int line = position.getLine();
         int col = position.getCol();
@@ -38,6 +42,9 @@ public class WorldBoard extends Pane {
         this.rectangles[newCol][newLine] = this.addRectangle(newPosition);
     }
 
+    /**
+     * Fill the board from world data
+     */
     private void fillBoard() {
         for (int line = 0; line < this.world.nLines(); line++ ) {
             for (int col = 0; col < this.world.nCols(); col++) {
@@ -49,7 +56,11 @@ public class WorldBoard extends Pane {
         }
     }
 
-
+    /**
+     * Add rectangle to pane
+     * @param position - position to add rectangle
+     * @return - rectangle
+     */
     private Rectangle addRectangle(CellPosition position) {
         int i = position.getLine();
         int j = position.getCol();

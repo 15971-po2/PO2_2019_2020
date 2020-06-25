@@ -23,6 +23,7 @@ public class ContagiousBoard extends VBox implements View {
 
     public ContagiousBoard() {
 
+        // Setup menu
         Menu file = new Menu("File");
 
         MenuItem start = new MenuItem("Start");
@@ -76,14 +77,23 @@ public class ContagiousBoard extends VBox implements View {
         });
     }
 
+    /**
+     * Handle start action
+     */
     private void start() {
         world.start();
     }
 
+    /**
+     * Handle stop action
+     */
     private void stop() {
         world.stop();
     }
 
+    /**
+     * Handle setup action
+     */
     private void setup() {
         this.stop();
         SetupDialog dialog = new SetupDialog();;
@@ -102,6 +112,9 @@ public class ContagiousBoard extends VBox implements View {
         this.getScene().getWindow().sizeToScene();
     }
 
+    /**
+     * Handle open action
+     */
     private void open() {
         this.stop();
         world.readFile();
@@ -112,12 +125,19 @@ public class ContagiousBoard extends VBox implements View {
         this.getScene().getWindow().sizeToScene();
     }
 
+    /**
+     * Handle save action
+     */
     private void save() {
         this.stop();
         world.saveFile();
     }
 
-
+    /**
+     * Update position in world board
+     * @param position - current position
+     * @param newPosition - new position to move
+     */
     @Override
     public void updatePosition(CellPosition position, CellPosition newPosition) {
         Platform.runLater( () -> {

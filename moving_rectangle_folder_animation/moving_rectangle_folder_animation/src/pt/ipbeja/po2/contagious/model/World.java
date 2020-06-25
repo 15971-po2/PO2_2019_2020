@@ -147,14 +147,25 @@ public class World {
         }
     }
 
+    /**
+     * Get number of lines
+     * @return - number of lines
+     */
     public int nLines() {
         return this.nLines;
     }
 
+    /**
+     * Get number of columns
+     * @return - number of columns
+     */
     public int nCols() {
         return this.nCols;
     }
 
+    /**
+     * Move people
+     */
     private void move() {
         for (int line = 0; line < this.nLines; line++) {
             for (int col = 0; col < this.nCols; col++) {
@@ -181,6 +192,9 @@ public class World {
         this.updateInfections();
     }
 
+    /**
+     * Update person's sickness status
+     */
     public void updateInfections() {
         for (int line = 0; line < this.nLines; line++) {
             for (int col = 0; col < this.nCols; col++) {
@@ -195,8 +209,8 @@ public class World {
 
     /**
      * Check if move coordinates are not out of bounds
-     * @param line line number
-     * @param col col number
+     * @param line - line number
+     * @param col - col number
      * @return true if move is not out of bounds
      */
     public static boolean isValidMove(int line, int col)
@@ -206,8 +220,8 @@ public class World {
 
     /**
      * Check for infected neighbors (up, down, left and right)
-     * @param position position to check neighbors
-     * @return true if person got infected
+     * @param position - position to check neighbors
+     * @return - true if person got infected
      */
     private boolean checkInfection(CellPosition position) {
         int line = position.getLine();
@@ -248,10 +262,12 @@ public class World {
     }
 
     /**
-     * Moves the keeper if the move is valid.
-     * @param line the line to move to
-     * @param col the column to move to
-     * @return true if the person moved, false otherwise
+     * Moves the person if the move is valid.
+     * @param line - person's current line
+     * @param col - person's current col
+     * @param newLine - the line to move to
+     * @param newCol - the column to move to
+     * @return - true if the person moved, false otherwise
      */
     public boolean movePerson(int line, int col, int newLine, int newCol) {
         boolean validMove = this.isValidMove(newLine, newCol);
@@ -282,6 +298,11 @@ public class World {
         }
     }
 
+    /**
+     * Create healthy person
+     * @param line - new healthy person's line
+     * @param col - new healthy person's col
+     */
     public void createHealthyPerson(int line, int col) {
         Cell cell = this.cells[line][col];
         if (this.isValidMove(line, col) && cell.isEmpty()) {
@@ -289,6 +310,11 @@ public class World {
         }
     }
 
+    /**
+     * Create sick person
+     * @param line - new sick person's line
+     * @param col - new sick person's col
+     */
     public void createSickPerson(int line, int col) {
         Cell cell = this.cells[line][col];
         if (this.isValidMove(line, col) && cell.isEmpty()) {
@@ -296,6 +322,11 @@ public class World {
         }
     }
 
+    /**
+     * Create immune person
+     * @param line - new immune person's line
+     * @param col - new immune person's col
+     */
     public void createImmunePerson(int line, int col) {
         Cell cell = this.cells[line][col];
         if (this.isValidMove(line, col) && cell.isEmpty()) {
@@ -303,6 +334,9 @@ public class World {
         }
     }
 
+    /**
+     * Start contagious movement thread
+     */
     public void start() {
         this.simulate = new Thread( () -> {
             this.simulate(10000);
@@ -310,11 +344,16 @@ public class World {
         this.simulate.start();
     }
 
+    /**
+     * Stop contagious movement thread
+     */
     public void stop() {
         this.simulate.stop();
     }
 
-
+    /**
+     * Contagious simulation
+     */
     private void simulate(int nIter) {
         for (int i = 0; i < nIter; i++) {
             try {
@@ -326,6 +365,9 @@ public class World {
         }
     }
 
+    /**
+     * Read data from text file
+     */
     public void readFile() {
         this.fileData = new ArrayList<>();
         try {
@@ -343,6 +385,9 @@ public class World {
         this.fillFromData();
     }
 
+    /**
+     * Fill grid with data read from file
+     */
     private void fillFromData() {
         if (this.fileData.size() > 4) {
             this.nLines = Integer.parseInt(this.fileData.get(0));
@@ -361,11 +406,9 @@ public class World {
                 if (!data.matches(".*\\d.*")) {
                     switch (data) {
                         case "healthy":
-                            System.out.println("healthy");
                             for (int cell = i + 1; cell < this.fileData.size() - 2; cell++) {
                                 if (this.fileData.get(cell).matches(".*\\d.*")) {
                                     String[] splitted = this.fileData.get(cell).split(" ");
-                                    System.out.println(splitted[0] + " " + splitted[1]);
                                     this.createHealthyPerson(Integer.valueOf(splitted[0]), Integer.valueOf(splitted[1]));
                                 } else {
                                     break;
@@ -373,11 +416,9 @@ public class World {
                             }
                             break;
                         case "immune":
-                            System.out.println("immune");
                             for (int cell = i + 1; cell < this.fileData.size() - 2; cell++) {
                                 if (this.fileData.get(cell).matches(".*\\d.*")) {
                                     String[] splitted = this.fileData.get(cell).split(" ");
-                                    System.out.println(splitted[0] + " " + splitted[1]);
                                     this.createImmunePerson(Integer.parseInt(splitted[0]), Integer.parseInt(splitted[1]));
                                 } else {
                                     break;
@@ -385,11 +426,9 @@ public class World {
                             }
                             break;
                         case "sick":
-                            System.out.println("sick");
                             for (int cell = i + 1; cell < this.fileData.size(); cell++) {
                                 if (this.fileData.get(cell).matches(".*\\d.*")) {
                                     String[] splitted = this.fileData.get(cell).split(" ");
-                                    System.out.println(splitted[0] + " " + splitted[1]);
                                     this.createSickPerson(Integer.parseInt(splitted[0]), Integer.parseInt(splitted[1]));
                                 } else {
                                     break;
@@ -402,6 +441,9 @@ public class World {
         }
     }
 
+    /**
+     * Save current grid to text file
+     */
     public void saveFile() {
         List<String> saveData = new ArrayList<>();
         List<String> healthy = new ArrayList<>();
