@@ -44,30 +44,21 @@ public class WorldBoard extends Pane {
 //    }
 
     public void updatePosition(CellPosition position, CellPosition newPosition) {
-//        this.rectangles = new Rectangle[world.nCols()][world.nLines()];
-//        this.getChildren().clear();
-//        for (int line = 0; line < this.world.nLines(); line++) {
-//            for (int col = 0; col < this.world.nCols(); col++) {
-//                if (!this.world.getCell(line, col).isEmpty()) {
-//                    CellPosition position = new CellPosition(line, col);
-//                    this.rectangles[col][line] = this.addRectangle(position);
-//                }
-//            }
-//        }
-//    }
         int line = position.getLine();
         int col = position.getCol();
-        int newLine = newPosition.getLine() * CELL_SIZE;
-        int newCol = newPosition.getCol() * CELL_SIZE;
-//        System.out.println("Old: " + line + " " + col);
-//        System.out.println("New " + newLine + " " + newCol);
-//        System.out.println();
-        Rectangle rect = this.rectangles[col][line];
-        TranslateTransition tt =
-                new TranslateTransition(Duration.millis(200), rect);
-        tt.setFromX(newCol / 50);
-        tt.setFromY(newLine / 50);
-        tt.play();
+        int newLine = newPosition.getLine();
+        int newCol = newPosition.getCol();
+        //System.out.println("Old: " + line + " " + col);System.out.println("New " + newLine + " " + newCol);
+        //System.out.println();
+        this.getChildren().remove(this.rectangles[col][line]);
+        this.rectangles[col][line].setOpacity(0);
+        this.rectangles[newCol][newLine] = this.addRectangle(newPosition);
+
+//        TranslateTransition tt =
+//                new TranslateTransition(Duration.millis(200), rect);
+//        tt.setFromX(newCol);
+//        tt.setFromY(newLine);
+//        tt.play();
     }
 
 

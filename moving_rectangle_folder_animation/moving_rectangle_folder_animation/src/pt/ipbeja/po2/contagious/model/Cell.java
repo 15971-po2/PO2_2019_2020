@@ -29,7 +29,7 @@ public abstract class Cell {
             }
             int newLine = this.line + lineMove;
             int newCol = this.col + colMove;
-            if (World.isValid(newLine, newCol) && World.getCell(newLine, newCol).isEmpty()) {
+            if (World.isValidMove(newLine, newCol) && World.getCell(newLine, newCol).isEmpty()) {
                 //System.out.println("Old coordinates " + this.line + " " + this.col);
                 this.line = newLine;
                 this.col = newCol;

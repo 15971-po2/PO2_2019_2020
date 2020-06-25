@@ -2,6 +2,7 @@ package pt.ipbeja.po2.contagious.model;
 
 import java.util.Collections;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class World {
     public static final Random rand = new Random();
@@ -186,12 +187,26 @@ public class World {
                         this.cells[newLine][newCol] = new HealthyPerson(newPosition);
                     }
                     this.view.updatePosition(position, newPosition);
+
+                }
+            }
+        }
+        this.updateInfections();
+    }
+
+    public void updateInfections() {
+        for (int line = 0; line < this.nLines; line++) {
+            for (int col = 0; col < this.nCols; col++) {
+                Cell cell = this.cells[line][col];
+                CellPosition position = new CellPosition(line, col);
+                if (!cell.isEmpty() && this.checkInfection(position)) {
+                    this.cells[line][col] = new SickPerson(position);
                 }
             }
         }
     }
 
-    public static boolean isValid(int line, int col)
+    public static boolean isValidMove(int line, int col)
     {
         // Returns true if line and column number
         // is in range
@@ -204,70 +219,39 @@ public class World {
         int col = position.getCol();
         boolean isInfected = false;
 
-        //----------- 1st Neighbour (North) ------------
+        if (!this.getCell(line, col).isImmune()) {
+            //----------- 1st Neighbour (North) ------------
 
-        if (isValid(line - 1, col))
-        {
-            if (this.cells[line - 1][col].isSick())
-                isInfected = true;
+            if (isValidMove(line - 1, col))
+            {
+                if (this.cells[line - 1][col].isSick())
+                    isInfected = true;
+            }
+
+            //----------- 2nd Neighbour (South) ------------
+
+            if (isValidMove(line + 1, col))
+            {
+                if (this.cells[line + 1][col].isSick())
+                    isInfected = true;
+            }
+
+            //----------- 3rd Neighbour (East) ------------
+
+            if (isValidMove(line, col + 1))
+            {
+                if (this.cells[line][col + 1].isSick())
+                    isInfected = true;
+            }
+
+            //----------- 4th Neighbour (West) ------------
+
+            if (isValidMove(line, col - 1))
+            {
+                if (this.cells[line][col - 1].isSick())
+                    isInfected = true;
+            }
         }
-
-        //----------- 2nd Neighbour (South) ------------
-
-        if (isValid(line + 1, col))
-        {
-            if (this.cells[line + 1][col].isSick())
-                isInfected = true;
-        }
-
-        //----------- 3rd Neighbour (East) ------------
-
-        if (isValid(line, col + 1))
-        {
-            if (this.cells[line][col + 1].isSick())
-                isInfected = true;
-        }
-
-        //----------- 4th Neighbour (West) ------------
-
-        if (isValid(line, col - 1))
-        {
-            if (this.cells[line][col - 1].isSick())
-                isInfected = true;
-        }
-
-        //----------- 5th Neighbour (North-East) ------------
-
-        if (isValid(line - 1, col + 1))
-        {
-            if (this.cells[line - 1][col + 1].isSick())
-                isInfected = true;
-        }
-
-        //----------- 6th Neighbour (North-West) ------------
-
-        if (isValid(line - 1, col - 1))
-        {
-            if (this.cells[line - 1][col - 1].isSick())
-                isInfected = true;
-        }
-
-        //----------- 7th Neighbour (South-East) ------------
-
-        if (isValid(line + 1, col + 1))
-        {
-            if (this.cells[line + 1][col + 1].isSick())
-                isInfected = true;
-        }
-
-        //----------- 8th Neighbour (South-West) ------------
-
-        if (isValid(line + 1, col - 1) == true)
-        {
-            if (this.cells[line + 1][col - 1].isSick())
-                isInfected = true;
-        }
-
         return isInfected;
     }
 
@@ -275,7 +259,63 @@ public class World {
         return cells[line][col];
     }
 
-    private void simulate(int nIter) {
+    /**
+     * Moves the keeper if the move is valid.
+     * @param line the line to move to
+     * @param col the column to move to
+     * @return true if the person moved, false otherwise
+     */
+    public boolean movePerson(int line, int col, int newLine, int newCol) {
+        boolean validMove = this.isValidMove(newLine, newCol);
+        if (validMove) {
+            Cell oldCell = this.cells[line][col];
+            Cell newCell = this.cells[newLine][newCol];
+            if (oldCell.isHealthy() && newCell.isEmpty()) {
+                this.cells[line][col] = new EmptyCell(oldCell.cellPosition());
+                this.cells[newLine][newCol] = new HealthyPerson(newCell.cellPosition());
+                this.updateInfections();
+                return true;
+            } else if (oldCell.isSick() &&newCell.isEmpty()) {
+                this.cells[line][col] = new EmptyCell(oldCell.cellPosition());
+                this.cells[newLine][newCol] = new SickPerson(newCell.cellPosition());
+                this.updateInfections();
+                return true;
+            } else if (oldCell.isImmune() && newCell.isEmpty()) {
+                this.cells[line][col] = new EmptyCell(oldCell.cellPosition());
+                this.cells[newLine][newCol] = new ImmunePerson(newCell.cellPosition());
+                this.updateInfections();
+                return true;
+            }
+            else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    public void createHealthyPerson(int line, int col) {
+        Cell cell = this.cells[line][col];
+        if (this.isValidMove(line, col) && cell.isEmpty()) {
+            this.cells[line][col] = new HealthyPerson(cell.cellPosition());
+        }
+    }
+
+    public void createSickPerson(int line, int col) {
+        Cell cell = this.cells[line][col];
+        if (this.isValidMove(line, col) && cell.isEmpty()) {
+            this.cells[line][col] = new SickPerson(cell.cellPosition());
+        }
+    }
+
+    public void createImmunePerson(int line, int col) {
+        Cell cell = this.cells[line][col];
+        if (this.isValidMove(line, col) && cell.isEmpty()) {
+            this.cells[line][col] = new ImmunePerson(cell.cellPosition());
+        }
+    }
+
+//    private void simulate(int nIter) {
 //        for (int i = 0; i < nIter; i++) {
 //            try {
 //                Thread.sleep(400);
@@ -286,5 +326,5 @@ public class World {
 //                this.view.updatePosition(cell.dx(), cell.dy(), i);
 //            }
 //        }
-    }
+//    }
 }

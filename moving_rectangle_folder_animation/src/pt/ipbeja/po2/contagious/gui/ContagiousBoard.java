@@ -3,6 +3,7 @@ package pt.ipbeja.po2.contagious.gui;
 import javafx.application.Platform;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import pt.ipbeja.po2.contagious.model.CellPosition;
 import pt.ipbeja.po2.contagious.model.View;
@@ -22,6 +23,7 @@ public class ContagiousBoard extends VBox implements View {
         this.getChildren().add(startButton);
 
         startButton.setOnMouseClicked((e) -> {
+            System.out.println((boolean res = (4 == 5));
             world = new World(this, 50, 50);
             this.pane = new WorldBoard(this.world, 10);
             this.counterLabel = new Label(("0"));
