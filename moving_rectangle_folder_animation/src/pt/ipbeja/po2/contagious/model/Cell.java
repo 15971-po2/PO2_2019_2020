@@ -1,39 +1,75 @@
 package pt.ipbeja.po2.contagious.model;
 
-import pt.ipbeja.po2.contagious.gui.ContagiousBoard;
-
-public class Cell {
+public abstract class Cell {
     private CellPosition cellPosition;
-    private int dx;
-    private int dy;
+    private int line;
+    private int col;
 
     public Cell(CellPosition cellPosition) {
         this.cellPosition = cellPosition;
+        this.line = cellPosition.getLine();
+        this.col = cellPosition.getCol();
     }
 
     public CellPosition cellPosition() {
-        return cellPosition;
+        return this.cellPosition;
     }
 
-    public boolean randomMove() {
+    public CellPosition randomMove(int speed) {
         final int[] v = {-1, 0, 1};
-        this.dx = v[World.rand.nextInt(3)];
-        this.dy = v[World.rand.nextInt(3)];
-        if (dx == 0 && dy == 0) {// to force a move
-            dx = 1;
+        boolean valid = false;
+        while(!valid) {
+            int lineMove = v[World.rand.nextInt(3)] * speed;
+            int colMove = v[World.rand.nextInt(3)] * speed;
+            if (lineMove == 0 && colMove == 0) {// to force a move
+                lineMove = 1;
+            }
+            int newLine = this.line + lineMove;
+            int newCol = this.col + colMove;
+            if (World.isValidMove(newLine, newCol) && World.getCell(newLine, newCol).isEmpty()) {
+                this.line = newLine;
+                this.col = newCol;
+                this.cellPosition = new CellPosition(newLine, newCol);
+                valid = true;
+            }
         }
-        this.cellPosition = new CellPosition(
-                this.cellPosition.getLine() + dy,
-                this.cellPosition.getCol() + dx);
-
-        return true;
+        return this.cellPosition;
     }
 
-    public int dx() {
-        return this.dx;
+    public int getLine() {
+        return this.line;
     }
 
-    public int dy() {
-        return this.dy;
+    public int getCol() {
+        return this.col;
     }
+
+    /**
+     *
+     * @return
+     */
+    @Override
+    public String toString() {
+        return "(" + this.line + ", " + this.col + ")";
+    }
+
+    /**
+     * @return true if cell is healthy, false otherwise
+     */
+    public abstract boolean isHealthy();
+
+    /**
+     * @return true if cell is empty, false otherwise
+     */
+    public abstract boolean isEmpty();
+
+    /**
+     * @return true if cell is sick, false otherwise
+     */
+    public abstract boolean isSick();
+
+    /**
+     * @return true if cell is immune, false otherwise
+     */
+    public abstract boolean isImmune();
 }

@@ -1,6 +1,11 @@
 package pt.ipbeja.po2.contagious.model;
 
 public class SickPerson extends Person {
+
+    public SickPerson(CellPosition cellPosition) {
+        super(cellPosition);
+    }
+
     @Override
     public boolean isHealthy() {
         return false;

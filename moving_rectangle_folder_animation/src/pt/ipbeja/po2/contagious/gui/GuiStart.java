@@ -15,7 +15,7 @@ public class GuiStart extends Application {
         Scene scene = new Scene(board);
 
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Moving Rectangle");
+        primaryStage.setTitle("Contagious");
         primaryStage.setOnCloseRequest((e) -> {
             System.exit(0);
         });
