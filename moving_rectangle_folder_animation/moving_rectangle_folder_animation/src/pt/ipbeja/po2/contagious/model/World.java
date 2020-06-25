@@ -1,6 +1,13 @@
 package pt.ipbeja.po2.contagious.model;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 public class World {
     public static final Random rand = new Random();
@@ -17,8 +24,11 @@ public class World {
 
     private Thread simulate;
 
+    private List<String> fileData;
 
-    public World(View view, int nLines, int nCols, int nHealthyPersons, int nSickPersons, int speed, int directions) {
+
+    public World(View view, int nLines, int nCols,
+                 int nHealthyPersons, int nSickPersons, int speed, int directions) {
         this.view = view;
         this.nLines = nLines;
         this.nCols = nCols;
@@ -33,7 +43,7 @@ public class World {
     }
 
     /**
-     * Creates the game board
+     * Create contagious board
      */
     private void fill() {
         int healthyCounter = 0;
@@ -61,6 +71,9 @@ public class World {
         this.shuffleCells();
     }
 
+    /**
+     * Shuffle cells array
+     */
     private void shuffleCells() {
         Random random = new Random();
 
@@ -150,8 +163,7 @@ public class World {
                 int oldCol = cell.getCol();
                 if (!cell.isEmpty()) {
                     CellPosition position = new CellPosition(oldLine, oldCol);
-                    System.out.println("FROM " + position.getLine() + " " + position.getCol());
-                    CellPosition newPosition = cell.randomMove();
+                    CellPosition newPosition = cell.randomMove(this.speed);
                     int newLine = newPosition.getLine();
                     int newCol = newPosition.getCol();
                     this.cells[oldLine][oldCol] = new EmptyCell(position);
@@ -163,7 +175,6 @@ public class World {
                         this.cells[newLine][newCol] = new HealthyPerson(newPosition);
                     }
                     this.view.updatePosition(position, newPosition);
-
                 }
             }
         }
@@ -294,7 +305,7 @@ public class World {
 
     public void start() {
         this.simulate = new Thread( () -> {
-            this.simulate(200);
+            this.simulate(10000);
         });
         this.simulate.start();
     }
@@ -312,6 +323,124 @@ public class World {
                 e.printStackTrace();
             }
             this.move();
+        }
+    }
+
+    public void readFile() {
+        this.fileData = new ArrayList<>();
+        try {
+            File f = new File("src/resources/board.txt");
+            Scanner sc = new Scanner(f);
+
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine();
+                fileData.add(line);
+            }
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        this.fillFromData();
+    }
+
+    private void fillFromData() {
+        if (this.fileData.size() > 4) {
+            this.nLines = Integer.parseInt(this.fileData.get(0));
+            this.nCols = Integer.parseInt(this.fileData.get(1));
+            this.cells = new Cell[this.nLines][this.nCols];
+            for (int line = 0; line < this.nLines; line++) {
+                for (int col = 0; col < this.nCols; col++) {
+                    Cell cell = null;
+                    CellPosition position = new CellPosition(line, col);
+                    cell = new EmptyCell(position);
+                    this.cells[line][col] = cell;
+                }
+            }
+            for (int i = 2; i < this.fileData.size() - 1; i++) {
+                String data = this.fileData.get(i);
+                if (!data.matches(".*\\d.*")) {
+                    switch (data) {
+                        case "healthy":
+                            System.out.println("healthy");
+                            for (int cell = i + 1; cell < this.fileData.size() - 2; cell++) {
+                                if (this.fileData.get(cell).matches(".*\\d.*")) {
+                                    String[] splitted = this.fileData.get(cell).split(" ");
+                                    System.out.println(splitted[0] + " " + splitted[1]);
+                                    this.createHealthyPerson(Integer.valueOf(splitted[0]), Integer.valueOf(splitted[1]));
+                                } else {
+                                    break;
+                                }
+                            }
+                            break;
+                        case "immune":
+                            System.out.println("immune");
+                            for (int cell = i + 1; cell < this.fileData.size() - 2; cell++) {
+                                if (this.fileData.get(cell).matches(".*\\d.*")) {
+                                    String[] splitted = this.fileData.get(cell).split(" ");
+                                    System.out.println(splitted[0] + " " + splitted[1]);
+                                    this.createImmunePerson(Integer.parseInt(splitted[0]), Integer.parseInt(splitted[1]));
+                                } else {
+                                    break;
+                                }
+                            }
+                            break;
+                        case "sick":
+                            System.out.println("sick");
+                            for (int cell = i + 1; cell < this.fileData.size(); cell++) {
+                                if (this.fileData.get(cell).matches(".*\\d.*")) {
+                                    String[] splitted = this.fileData.get(cell).split(" ");
+                                    System.out.println(splitted[0] + " " + splitted[1]);
+                                    this.createSickPerson(Integer.parseInt(splitted[0]), Integer.parseInt(splitted[1]));
+                                } else {
+                                    break;
+                                }
+                            }
+                            break;
+                    }
+                }
+            }
+        }
+    }
+
+    public void saveFile() {
+        List<String> saveData = new ArrayList<>();
+        List<String> healthy = new ArrayList<>();
+        List<String> immune = new ArrayList<>();
+        List<String> sick = new ArrayList<>();
+        saveData.add(String.valueOf(this.nLines));
+        saveData.add(String.valueOf(this.nCols));
+        for (int line = 0; line < this.nLines; line++) {
+            for (int col = 0; col < this.nCols; col++) {
+                if (this.cells[line][col].isHealthy()) {
+                    healthy.add(line + " " + col);
+                } else if (this.cells[line][col].isImmune()) {
+                    immune.add(line + " " + col);
+                } else if (this.cells[line][col].isSick()) {
+                    sick.add(line + " " + col);
+                }
+
+            }
+        }
+        saveData.add("healthy");
+        for (int i = 0; i < healthy.size(); i++) {
+            saveData.add(healthy.get(i));
+        }
+        saveData.add("immune");
+        for (int i = 0; i < immune.size(); i++) {
+            saveData.add(immune.get(i));
+        }
+        saveData.add("sick");
+        for (int i = 0; i < sick.size(); i++) {
+            saveData.add(sick.get(i));
+        }
+        try {
+            FileWriter writer = new FileWriter("src/resources/board.txt");
+            for (int i = 0; i < saveData.size(); i++) {
+                writer.write(saveData.get(i) + "\n");
+            }
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

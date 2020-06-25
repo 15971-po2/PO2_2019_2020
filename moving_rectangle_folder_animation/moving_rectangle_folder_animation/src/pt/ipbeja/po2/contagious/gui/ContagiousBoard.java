@@ -40,9 +40,21 @@ public class ContagiousBoard extends VBox implements View {
             this.setup();
         });
 
+        MenuItem open = new MenuItem("Open");
+        open.setOnAction(e -> {
+            this.open();
+        });
+
+        MenuItem save = new MenuItem("Save As...");
+        save.setOnAction(e -> {
+            this.save();
+        });
+
         file.getItems().add(start);
         file.getItems().add(stop);
         file.getItems().add(setup);
+        file.getItems().add(open);
+        file.getItems().add(save);
         menuBar = new MenuBar();
         menuBar.getMenus().add(file);
 
@@ -58,8 +70,9 @@ public class ContagiousBoard extends VBox implements View {
             this.counterLabel.setPrefWidth(pane.getPrefWidth());
             startButton.setPrefWidth(pane.getPrefWidth());
             this.getChildren().remove(startButton);
-            this.getChildren().addAll(menuBar, this.pane);
+            this.getChildren().addAll(menuBar);
             this.getScene().getWindow().sizeToScene();
+            this.setup();
         });
     }
 
@@ -72,6 +85,7 @@ public class ContagiousBoard extends VBox implements View {
     }
 
     private void setup() {
+        this.stop();
         SetupDialog dialog = new SetupDialog();;
         Optional<SetupData> result = dialog.showAndWait();
         SetupData setup = result.get();
@@ -79,7 +93,8 @@ public class ContagiousBoard extends VBox implements View {
         this.nSick = setup.getSick();
         this.speed = setup.getSpeed();
         this.directions = setup.getDirections();
-        this.world = new World(this, 50, 50, this.nHealthy, this.nSick, this.speed, this.directions);
+        this.world = new World(this, 50, 50,
+                this.nHealthy, this.nSick, this.speed, this.directions);
         this.pane.getChildren().clear();
         this.pane = new WorldBoard(this.world, 10);
         this.getChildren().clear();
@@ -87,15 +102,21 @@ public class ContagiousBoard extends VBox implements View {
         this.getScene().getWindow().sizeToScene();
     }
 
-    @Override
-    public void populateWorld(CellPosition position) {
-        pane.populateWorld(position);
+    private void open() {
+        this.stop();
+        world.readFile();
+        this.pane.getChildren().clear();
+        this.pane = new WorldBoard(this.world, 10);
+        this.getChildren().clear();
+        this.getChildren().addAll(this.menuBar, this.pane);
+        this.getScene().getWindow().sizeToScene();
     }
 
-    @Override
-    public void addPerson(CellPosition position) {
-        pane.addPerson(position);
+    private void save() {
+        this.stop();
+        world.saveFile();
     }
+
 
     @Override
     public void updatePosition(CellPosition position, CellPosition newPosition) {

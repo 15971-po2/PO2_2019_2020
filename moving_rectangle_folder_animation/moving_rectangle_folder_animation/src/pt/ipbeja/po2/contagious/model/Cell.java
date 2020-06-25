@@ -15,12 +15,12 @@ public abstract class Cell {
         return this.cellPosition;
     }
 
-    public CellPosition randomMove() {
+    public CellPosition randomMove(int speed) {
         final int[] v = {-1, 0, 1};
         boolean valid = false;
         while(!valid) {
-            int lineMove = v[World.rand.nextInt(3)];
-            int colMove = v[World.rand.nextInt(3)];
+            int lineMove = v[World.rand.nextInt(3)] * speed;
+            int colMove = v[World.rand.nextInt(3)] * speed;
             if (lineMove == 0 && colMove == 0) {// to force a move
                 lineMove = 1;
             }

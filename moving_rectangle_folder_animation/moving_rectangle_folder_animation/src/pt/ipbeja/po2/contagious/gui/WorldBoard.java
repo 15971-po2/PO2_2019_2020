@@ -27,14 +27,6 @@ public class WorldBoard extends Pane {
         this.fillBoard();
     }
 
-    public void populateWorld(CellPosition position) {
-        //this.rectangle = this.addRectangle(position);
-    }
-
-    public void addPerson(CellPosition position) {
-        this.rectangles[position.getLine()][position.getCol()] = this.addRectangle(position);
-    }
-
     public void updatePosition(CellPosition position, CellPosition newPosition) {
         int line = position.getLine();
         int col = position.getCol();

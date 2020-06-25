@@ -44,7 +44,10 @@ public class SetupDialog extends Dialog<SetupData> {
         getDialogPane().setContent(pane);
 
         setResultConverter(button -> {
-            return new SetupData(healthySpinner.getValue(), sickSpinner.getValue(), speedSpinner.getValue(), directionSpinner.getValue());
+            return new SetupData(healthySpinner.getValue(),
+                    sickSpinner.getValue(),
+                    speedSpinner.getValue(),
+                    directionSpinner.getValue());
         });
     }
 }
