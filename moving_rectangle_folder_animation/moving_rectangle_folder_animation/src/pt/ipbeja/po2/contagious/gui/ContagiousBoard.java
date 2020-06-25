@@ -1,8 +1,6 @@
 package pt.ipbeja.po2.contagious.gui;
 
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import pt.ipbeja.po2.contagious.model.CellPosition;
@@ -18,6 +16,8 @@ public class ContagiousBoard extends VBox implements View {
 
     private int nHealthy;
     private int nSick;
+    private int speed;
+    private int directions;
 
     MenuBar menuBar;
 
@@ -52,7 +52,7 @@ public class ContagiousBoard extends VBox implements View {
         this.getChildren().add(startButton);
 
         startButton.setOnMouseClicked((e) -> {
-            this.world = new World(this, 50, 50, 10, 2);
+            this.world = new World(this, 50, 50, 10, 2, 0, 0);
             this.pane = new WorldBoard(this.world, 10);
             this.counterLabel = new Label(("0"));
             this.counterLabel.setPrefWidth(pane.getPrefWidth());
@@ -60,17 +60,15 @@ public class ContagiousBoard extends VBox implements View {
             this.getChildren().remove(startButton);
             this.getChildren().addAll(menuBar, this.pane);
             this.getScene().getWindow().sizeToScene();
-
-            world.start();
         });
     }
 
     private void start() {
-        System.out.println("Hey");
+        world.start();
     }
 
     private void stop() {
-        System.out.println("Bye");
+        world.stop();
     }
 
     private void setup() {
@@ -79,13 +77,14 @@ public class ContagiousBoard extends VBox implements View {
         SetupData setup = result.get();
         this.nHealthy = setup.getHealthy();
         this.nSick = setup.getSick();
-        this.world = new World(this, 50, 50, nHealthy, nSick);
+        this.speed = setup.getSpeed();
+        this.directions = setup.getDirections();
+        this.world = new World(this, 50, 50, this.nHealthy, this.nSick, this.speed, this.directions);
         this.pane.getChildren().clear();
         this.pane = new WorldBoard(this.world, 10);
         this.getChildren().clear();
         this.getChildren().addAll(this.menuBar, this.pane);
         this.getScene().getWindow().sizeToScene();
-
     }
 
     @Override
@@ -103,24 +102,5 @@ public class ContagiousBoard extends VBox implements View {
         Platform.runLater( () -> {
             pane.updatePosition(position, newPosition);
         });
-    }
-
-    /**
-     * Click handler for the new game button
-     */
-    class NewGameButtonHandler implements EventHandler<ActionEvent> {
-
-        @Override
-        public void handle(ActionEvent event) {
-            newGame();
-        }
-    }
-
-    private void newGame() {
-        this.world.move();
-    }
-
-    private void newContagious() {
-
     }
 }

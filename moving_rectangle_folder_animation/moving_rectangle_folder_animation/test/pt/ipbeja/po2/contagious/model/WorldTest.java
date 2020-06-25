@@ -12,7 +12,7 @@ class WorldTest {
 
     @BeforeEach
     public void setUp() {
-        this.world = new World(view, 10, 10, 0, 0);
+        this.world = new World(view, 10, 10, 0, 0, 0, 0);
     }
 
     @AfterEach

@@ -1,22 +1,19 @@
 package pt.ipbeja.po2.contagious.gui;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
-import javafx.scene.control.Tooltip;
 import javafx.scene.layout.GridPane;
-import javafx.scene.text.Font;
 
 public class SetupDialog extends Dialog<SetupData> {
     private ButtonType okButton = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
     private ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
     private int nHealthy;
     private int nSick;
+    private int speed;
+    private int directions;
 
     public SetupDialog() {
         this.setTitle("New Contagious Settings");
@@ -26,20 +23,28 @@ public class SetupDialog extends Dialog<SetupData> {
 
         Label healthyLabel = new Label("Number of healthy persons: ");
         Label sickLabel = new Label("Number of sick persons: ");
+        Label speedLabel = new Label("Squares per move: ");
+        Label directionLabel = new Label("Direction changes: ");
         pane.add(healthyLabel, 0, 0);
         pane.add(sickLabel, 0, 1);
+        pane.add(speedLabel, 0, 2);
+        pane.add(directionLabel, 0, 3);
 
         Spinner<Integer> healthySpinner = new Spinner<Integer>(1, 50, 10);
         Spinner<Integer> sickSpinner = new Spinner<Integer>(1, 50, 2);
+        Spinner<Integer> speedSpinner = new Spinner<Integer>(1, 5, 1);
+        Spinner<Integer> directionSpinner = new Spinner<Integer>(0, 1, 1);
 
         pane.add(healthySpinner, 1, 0);
         pane.add(sickSpinner, 1, 1);
+        pane.add(speedSpinner, 1, 2);
+        pane.add(directionSpinner, 1, 3);
 
         getDialogPane().getButtonTypes().addAll(okButton, cancelButton);
         getDialogPane().setContent(pane);
 
         setResultConverter(button -> {
-            return new SetupData(healthySpinner.getValue(), sickSpinner.getValue());
+            return new SetupData(healthySpinner.getValue(), sickSpinner.getValue(), speedSpinner.getValue(), directionSpinner.getValue());
         });
     }
 }

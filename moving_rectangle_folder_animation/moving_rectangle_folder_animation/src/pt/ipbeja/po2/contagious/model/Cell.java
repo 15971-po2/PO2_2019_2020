@@ -1,7 +1,5 @@
 package pt.ipbeja.po2.contagious.model;
 
-import pt.ipbeja.po2.contagious.gui.ContagiousBoard;
-
 public abstract class Cell {
     private CellPosition cellPosition;
     private int line;
@@ -18,7 +16,6 @@ public abstract class Cell {
     }
 
     public CellPosition randomMove() {
-        CellPosition oldPosition = this.cellPosition;
         final int[] v = {-1, 0, 1};
         boolean valid = false;
         while(!valid) {
@@ -30,11 +27,8 @@ public abstract class Cell {
             int newLine = this.line + lineMove;
             int newCol = this.col + colMove;
             if (World.isValidMove(newLine, newCol) && World.getCell(newLine, newCol).isEmpty()) {
-                //System.out.println("Old coordinates " + this.line + " " + this.col);
                 this.line = newLine;
                 this.col = newCol;
-                //System.out.println("New coordinates " + this.line + " " + this.col);
-                //System.out.println();
                 this.cellPosition = new CellPosition(newLine, newCol);
                 valid = true;
             }

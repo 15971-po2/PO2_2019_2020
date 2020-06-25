@@ -1,12 +1,9 @@
 package pt.ipbeja.po2.contagious.gui;
 
-import javafx.animation.TranslateTransition;
 import javafx.application.Platform;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import javafx.util.Duration;
-import pt.ipbeja.po2.contagious.model.Cell;
 import pt.ipbeja.po2.contagious.model.CellPosition;
 import pt.ipbeja.po2.contagious.model.World;
 
@@ -38,29 +35,16 @@ public class WorldBoard extends Pane {
         this.rectangles[position.getLine()][position.getCol()] = this.addRectangle(position);
     }
 
-//    public void updatePosition(int dx, int dy) {
-//        this.rectangle.setX(this.rectangle.getX() + dx * CELL_SIZE); // move rectangle graphic
-//        this.rectangle.setY(this.rectangle.getY() + dy * CELL_SIZE); // move rectangle graphic
-//    }
-
     public void updatePosition(CellPosition position, CellPosition newPosition) {
         int line = position.getLine();
         int col = position.getCol();
         int newLine = newPosition.getLine();
         int newCol = newPosition.getCol();
-        //System.out.println("Old: " + line + " " + col);System.out.println("New " + newLine + " " + newCol);
-        //System.out.println();
+
         this.getChildren().remove(this.rectangles[col][line]);
         this.rectangles[col][line].setOpacity(0);
         this.rectangles[newCol][newLine] = this.addRectangle(newPosition);
-
-//        TranslateTransition tt =
-//                new TranslateTransition(Duration.millis(200), rect);
-//        tt.setFromX(newCol);
-//        tt.setFromY(newLine);
-//        tt.play();
     }
-
 
     private void fillBoard() {
         for (int line = 0; line < this.world.nLines(); line++ ) {

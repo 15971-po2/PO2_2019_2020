@@ -1,8 +1,6 @@
 package pt.ipbeja.po2.contagious.model;
 
-import java.util.Collections;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 public class World {
     public static final Random rand = new Random();
@@ -14,14 +12,21 @@ public class World {
     private final int nHealthyPersons;
     private final int nSickPersons;
     private final int nPersons;
+    private final int speed;
+    private final int directions;
+
+    private Thread simulate;
 
 
-    public World(View view, int nLines, int nCols, int nHealthyPersons, int nSickPersons) {
+    public World(View view, int nLines, int nCols, int nHealthyPersons, int nSickPersons, int speed, int directions) {
         this.view = view;
         this.nLines = nLines;
         this.nCols = nCols;
         this.nHealthyPersons = nHealthyPersons;
         this.nSickPersons = nSickPersons;
+        this.speed = speed;
+        this.directions = directions;
+        this.simulate = new Thread();
         this.nPersons = nHealthyPersons + nSickPersons;
         this.cells = new Cell[this.nLines][this.nCols];
         this.fill();
@@ -41,12 +46,8 @@ public class World {
                 if (nCells % 5 == 0 && ((healthyCounter + sickCounter) < this.nPersons)) {
                     if (healthyCounter < this.nHealthyPersons) {
                         cell = new HealthyPerson(position);
-                        //System.out.println(line + " " + col);
-                        //System.out.println("From position " + position.getLine() + " " + position.getCol());
                         healthyCounter++;
                     } else if (sickCounter < this.nSickPersons) {
-                        //System.out.println(line + " " + col);
-                        //System.out.println("From position " + position.getLine() + " " + position.getCol());
                         cell = new SickPerson(position);
                         sickCounter++;
                     }
@@ -58,7 +59,6 @@ public class World {
             }
         }
         this.shuffleCells();
-        //System.out.println(getCell(0, 30).isSick());
     }
 
     private void shuffleCells() {
@@ -134,17 +134,6 @@ public class World {
         }
     }
 
-    public void start() {
-//        for (int i = 0; i < nPersons; i++) {
-//            new Thread( () -> {
-//                this.populate();
-//                this.simulate(10);
-//
-//            }).start();
-//        }
-
-    }
-
     public int nLines() {
         return this.nLines;
     }
@@ -153,31 +142,18 @@ public class World {
         return this.nCols;
     }
 
-    private void populate(Cell cell) {
-        this.view.addPerson(cell.cellPosition());
-        view.populateWorld(cell.cellPosition());
-    }
-
-    public void move() {
+    private void move() {
         for (int line = 0; line < this.nLines; line++) {
             for (int col = 0; col < this.nCols; col++) {
                 Cell cell = this.cells[line][col];
-                //System.out.println(line + " " + col);
-                //System.out.println(this.getCell(cell.getLine(), cell.getCol()));
-                //System.out.println(this.getCell(cell.cellPosition().getLine(), cell.cellPosition().getCol()));
-                //System.out.println("From position " + cell.getLine() + " " + cell.getCol());
                 int oldLine = cell.getLine();
                 int oldCol = cell.getCol();
                 if (!cell.isEmpty()) {
-                    //System.out.println(cell.getLine() + " " + cell.getCol());
                     CellPosition position = new CellPosition(oldLine, oldCol);
                     System.out.println("FROM " + position.getLine() + " " + position.getCol());
                     CellPosition newPosition = cell.randomMove();
                     int newLine = newPosition.getLine();
                     int newCol = newPosition.getCol();
-                    //System.out.println("To " + newLine + " " + newCol);
-                    System.out.println("TO " + newPosition.getLine() + " " + newPosition.getCol());
-                    //System.out.println();
                     this.cells[oldLine][oldCol] = new EmptyCell(position);
                     if (cell.isImmune()) {
                         this.cells[newLine][newCol] = new ImmunePerson(newPosition);
@@ -206,46 +182,47 @@ public class World {
         }
     }
 
+    /**
+     * Check if move coordinates are not out of bounds
+     * @param line line number
+     * @param col col number
+     * @return true if move is not out of bounds
+     */
     public static boolean isValidMove(int line, int col)
     {
-        // Returns true if line and column number
-        // is in range
-        return (line >= 0) && (line < nLines) &&
-                (col >= 0) && (col < nCols);
+        return (line >= 0) && (line < nLines) && (col >= 0) && (col < nCols);
     }
 
+    /**
+     * Check for infected neighbors (up, down, left and right)
+     * @param position position to check neighbors
+     * @return true if person got infected
+     */
     private boolean checkInfection(CellPosition position) {
         int line = position.getLine();
         int col = position.getCol();
         boolean isInfected = false;
 
         if (!this.getCell(line, col).isImmune()) {
-            //----------- 1st Neighbour (North) ------------
-
+            // Up
             if (isValidMove(line - 1, col))
             {
                 if (this.cells[line - 1][col].isSick())
                     isInfected = true;
             }
-
-            //----------- 2nd Neighbour (South) ------------
-
+            //Down
             if (isValidMove(line + 1, col))
             {
                 if (this.cells[line + 1][col].isSick())
                     isInfected = true;
             }
-
-            //----------- 3rd Neighbour (East) ------------
-
+            //Left
             if (isValidMove(line, col + 1))
             {
                 if (this.cells[line][col + 1].isSick())
                     isInfected = true;
             }
-
-            //----------- 4th Neighbour (West) ------------
-
+            //Right
             if (isValidMove(line, col - 1))
             {
                 if (this.cells[line][col - 1].isSick())
@@ -315,16 +292,26 @@ public class World {
         }
     }
 
-//    private void simulate(int nIter) {
-//        for (int i = 0; i < nIter; i++) {
-//            try {
-//                Thread.sleep(400);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//            if (cell.randomMove()) {
-//                this.view.updatePosition(cell.dx(), cell.dy(), i);
-//            }
-//        }
-//    }
+    public void start() {
+        this.simulate = new Thread( () -> {
+            this.simulate(200);
+        });
+        this.simulate.start();
+    }
+
+    public void stop() {
+        this.simulate.stop();
+    }
+
+
+    private void simulate(int nIter) {
+        for (int i = 0; i < nIter; i++) {
+            try {
+                Thread.sleep(400);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            this.move();
+        }
+    }
 }
