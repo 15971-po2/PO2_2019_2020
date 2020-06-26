@@ -1,0 +1,552 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="6b28ba8b-f7fd-47c6-977a-76ca6205b78a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/moving_rectangle_animation.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/moving_rectangle_animation/pt/ipbeja/po2/contagious/contagious.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/moving_rectangle_animation/pt/ipbeja/po2/contagious/gui/ContagiousBoard.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/moving_rectangle_animation/pt/ipbeja/po2/contagious/gui/GuiStart.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/moving_rectangle_animation/pt/ipbeja/po2/contagious/gui/SetupData.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/moving_rectangle_animation/pt/ipbeja/po2/contagious/gui/SetupDialog.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/moving_rectangle_animation/pt/ipbeja/po2/contagious/gui/WorldBoard.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/moving_rectangle_animation/pt/ipbeja/po2/contagious/model/Cell.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/moving_rectangle_animation/pt/ipbeja/po2/contagious/model/CellPosition.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/moving_rectangle_animation/pt/ipbeja/po2/contagious/model/EmptyCell.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/moving_rectangle_animation/pt/ipbeja/po2/contagious/model/HealthyPerson.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/moving_rectangle_animation/pt/ipbeja/po2/contagious/model/ImmunePerson.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/moving_rectangle_animation/pt/ipbeja/po2/contagious/model/Person.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/moving_rectangle_animation/pt/ipbeja/po2/contagious/model/SickPerson.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/moving_rectangle_animation/pt/ipbeja/po2/contagious/model/View.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/moving_rectangle_animation/pt/ipbeja/po2/contagious/model/World.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/moving_rectangle_animation/resources/board.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/moving_rectangle_animation/pt/ipbeja/po2/contagious/model/WorldTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pt/ipbeja/po2/contagious/contagious.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pt/ipbeja/po2/contagious/gui/ContagiousBoard.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pt/ipbeja/po2/contagious/gui/GuiStart.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pt/ipbeja/po2/contagious/gui/SetupData.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pt/ipbeja/po2/contagious/gui/SetupDialog.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pt/ipbeja/po2/contagious/gui/WorldBoard.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pt/ipbeja/po2/contagious/model/Cell.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pt/ipbeja/po2/contagious/model/CellPosition.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pt/ipbeja/po2/contagious/model/EmptyCell.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pt/ipbeja/po2/contagious/model/HealthyPerson.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pt/ipbeja/po2/contagious/model/ImmunePerson.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pt/ipbeja/po2/contagious/model/Person.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pt/ipbeja/po2/contagious/model/SickPerson.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pt/ipbeja/po2/contagious/model/View.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pt/ipbeja/po2/contagious/model/World.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resources/board.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/pt/ipbeja/po2/contagious/model/WorldTest.java" beforeDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/out/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CompilerWorkspaceConfiguration">
+    <option name="MAKE_PROJECT_ON_SAVE" value="true" />
+  </component>
+  <component name="DefaultGradleProjectSettings">
+    <option name="testRunner" value="GRADLE" />
+    <option name="delegatedBuild" value="true" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Enum" />
+        <option value="JUnit5 Test Class" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/pt/ipbeja/po2/contagious/gui/GuiStart.java" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-104" />
+    <option name="y" value="7" />
+    <option name="width" value="824" />
+    <option name="height" value="708" />
+  </component>
+  <component name="ProjectId" id="1ZBIlVyR0HPDrsp8AZ8xw9v0IW4" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="moving_rectangle_folder_animation" type="b2602c69:ProjectViewProjectNode" />
+              <item name="moving_rectangle_folder_animation" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="moving_rectangle_folder_animation" type="b2602c69:ProjectViewProjectNode" />
+              <item name="moving_rectangle_folder_animation" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="moving_rectangle_folder_animation" type="b2602c69:ProjectViewProjectNode" />
+              <item name="moving_rectangle_folder_animation" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pt.ipbeja.po2.contagious" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="moving_rectangle_folder_animation" type="b2602c69:ProjectViewProjectNode" />
+              <item name="moving_rectangle_folder_animation" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pt.ipbeja.po2.contagious" type="462c0819:PsiDirectoryNode" />
+              <item name="gui" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="moving_rectangle_folder_animation" type="b2602c69:ProjectViewProjectNode" />
+              <item name="moving_rectangle_folder_animation" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="pt.ipbeja.po2.contagious" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="SDKs" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+    <property name="settings.editor.selected.configurable" value="project.propCompiler" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="pt.ipbeja.po2.contagious.model" />
+      <recent name="pt.ipbeja.po2.contagious.gui" />
+    </key>
+    <key name="ExtractSuperBase.RECENT_KEYS">
+      <recent name="pt.ipbeja.po2.contagious.gui" />
+    </key>
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="pt.ipbeja.po2.contagious.model" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="pt.ipbeja.po2.contagious.model" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Hugo\Desktop\EI\PO2\moving_rectangle_folder_animation\src" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.GuiStart">
+    <configuration name="GuiStart" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="pt.ipbeja.po2.contagious.gui.GuiStart" />
+      <module name="moving_rectangle_animation" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="pt.ipbeja.po2.contagious.gui.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WorldTest" type="JUnit" factoryName="JUnit">
+      <module name="moving_rectangle_animation" />
+      <option name="PACKAGE_NAME" value="pt.ipbeja.po2.contagious.model" />
+      <option name="MAIN_CLASS_NAME" value="pt.ipbeja.po2.contagious.model.WorldTest" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WorldTest.testSingleInfection" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="moving_rectangle_animation" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="pt.ipbeja.po2.contagious.model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="pt.ipbeja.po2.contagious.model" />
+      <option name="MAIN_CLASS_NAME" value="pt.ipbeja.po2.contagious.model.WorldTest" />
+      <option name="METHOD_NAME" value="testSingleInfection" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="PARAMETERS" value="" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.GuiStart" />
+      <item itemvalue="JUnit.WorldTest" />
+      <item itemvalue="JUnit.WorldTest.testSingleInfection" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.GuiStart" />
+        <item itemvalue="JUnit.WorldTest.testSingleInfection" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="6b28ba8b-f7fd-47c6-977a-76ca6205b78a" name="Default Changelist" comment="" />
+      <created>1584306211865</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1584306211865</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <layout>
+      <window_info id="Image Layers" />
+      <window_info id="Designer" />
+      <window_info id="UI Designer" />
+      <window_info id="Capture Tool" />
+      <window_info id="Favorites" side_tool="true" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16187595" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Problems" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" visible="true" weight="0.30932897" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Palette" order="0" />
+      <window_info anchor="right" id="Theme Preview" order="1" />
+      <window_info anchor="right" id="Maven" order="2" />
+      <window_info anchor="right" id="Capture Analysis" order="3" />
+      <window_info anchor="right" id="Palette&#9;" order="4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="5" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="6" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="7" weight="0.25" />
+    </layout>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="1303" y="588" key="#GuiStart" timestamp="1586285878844">
+      <screen x="0" y="23" width="3200" height="1777" />
+    </state>
+    <state x="1303" y="588" key="#GuiStart/0.23.3200.1777@0.23.3200.1777" timestamp="1586285878844" />
+    <state x="2143" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1593061747887">
+      <screen x="1920" y="0" width="1536" height="824" />
+    </state>
+    <state x="2143" y="67" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824/1920.0.1536.824@1920.0.1536.824" timestamp="1593061747887" />
+    <state x="-1240" y="160" key="#com.intellij.ide.util.MemberChooser" timestamp="1592947555048">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1240" y="160" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1592947555048" />
+    <state x="2464" y="127" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824/1920.0.1536.824@1920.0.1536.824" timestamp="1590630697975" />
+    <state x="1133" y="296" key="#com.intellij.ide.util.MemberChooser/0.23.3200.1777@0.23.3200.1777" timestamp="1586684398504" />
+    <state x="2418" y="202" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1593061742405">
+      <screen x="1920" y="0" width="1536" height="824" />
+    </state>
+    <state x="2418" y="202" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1536.824/1920.0.1536.824@1920.0.1536.824" timestamp="1593061742405" />
+    <state x="1986" y="807" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1586160981118">
+      <screen x="0" y="23" width="3200" height="1777" />
+    </state>
+    <state x="1986" y="807" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.23.3200.1777@0.23.3200.1777" timestamp="1586160981118" />
+    <state x="1743" y="593" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog" timestamp="1586279028122">
+      <screen x="0" y="23" width="3200" height="1777" />
+    </state>
+    <state x="1743" y="593" key="#com.intellij.openapi.keymap.impl.ui.EditKeymapsDialog/0.23.3200.1777@0.23.3200.1777" timestamp="1586279028122" />
+    <state x="449" y="148" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1592930326570">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="449" y="148" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1592930326570" />
+    <state x="1919" y="803" width="430" height="225" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes" timestamp="1586160963997">
+      <screen x="0" y="23" width="3200" height="1777" />
+    </state>
+    <state x="1919" y="803" width="430" height="225" key="#com.intellij.refactoring.move.moveClassesOrPackages.MoveClassesOrPackagesDialog.classes/0.23.3200.1777@0.23.3200.1777" timestamp="1586160963997" />
+    <state x="1836" y="23" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1586599167308">
+      <screen x="0" y="23" width="3200" height="1777" />
+    </state>
+    <state x="1836" y="23" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.23.3200.1777@0.23.3200.1777" timestamp="1586599167308" />
+    <state x="1555" y="665" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1586599348921">
+      <screen x="0" y="23" width="3200" height="1777" />
+    </state>
+    <state x="1555" y="665" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.23.3200.1777@0.23.3200.1777" timestamp="1586599348921" />
+    <state x="1794" y="346" key="#org.jetbrains.kotlin.idea.refactoring.safeDelete.KotlinOverridingDialog" timestamp="1586177454438">
+      <screen x="0" y="23" width="3200" height="1777" />
+    </state>
+    <state x="1794" y="346" key="#org.jetbrains.kotlin.idea.refactoring.safeDelete.KotlinOverridingDialog/0.23.3200.1777@0.23.3200.1777" timestamp="1586177454438" />
+    <state x="1861" y="791" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1586198686521">
+      <screen x="0" y="23" width="3200" height="1777" />
+    </state>
+    <state x="1861" y="791" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.23.3200.1777@0.23.3200.1777" timestamp="1586198686521" />
+    <state width="392" height="466" key="DebuggerActiveHint" timestamp="1592972535039">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state width="392" height="466" key="DebuggerActiveHint/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1592972535039" />
+    <state x="-922" y="211" key="FileChooserDialogImpl" timestamp="1592970964364">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-922" y="211" key="FileChooserDialogImpl/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1592970964364" />
+    <state x="798" y="167" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1588778425542" />
+    <state width="1493" height="260" key="GridCell.Tab.0.bottom" timestamp="1593097348018">
+      <screen x="1920" y="0" width="1536" height="824" />
+    </state>
+    <state width="1877" height="347" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1592976087021" />
+    <state width="1493" height="281" key="GridCell.Tab.0.bottom/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1592935413301" />
+    <state width="1493" height="260" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1536.824@1920.0.1536.824" timestamp="1593097348018" />
+    <state width="2345" height="388" key="GridCell.Tab.0.bottom/0.23.3200.1777@0.23.3200.1777" timestamp="1586707822025" />
+    <state width="1493" height="260" key="GridCell.Tab.0.center" timestamp="1593097348018">
+      <screen x="1920" y="0" width="1536" height="824" />
+    </state>
+    <state width="1877" height="347" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1592976087021" />
+    <state width="1493" height="281" key="GridCell.Tab.0.center/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1592935413301" />
+    <state width="1493" height="260" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1536.824@1920.0.1536.824" timestamp="1593097348018" />
+    <state width="2345" height="388" key="GridCell.Tab.0.center/0.23.3200.1777@0.23.3200.1777" timestamp="1586707822025" />
+    <state width="1493" height="260" key="GridCell.Tab.0.left" timestamp="1593097348018">
+      <screen x="1920" y="0" width="1536" height="824" />
+    </state>
+    <state width="1877" height="347" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1592976087021" />
+    <state width="1493" height="281" key="GridCell.Tab.0.left/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1592935413301" />
+    <state width="1493" height="260" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1536.824@1920.0.1536.824" timestamp="1593097348018" />
+    <state width="2345" height="388" key="GridCell.Tab.0.left/0.23.3200.1777@0.23.3200.1777" timestamp="1586707822024" />
+    <state width="1493" height="260" key="GridCell.Tab.0.right" timestamp="1593097348018">
+      <screen x="1920" y="0" width="1536" height="824" />
+    </state>
+    <state width="1877" height="347" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1592976087021" />
+    <state width="1493" height="281" key="GridCell.Tab.0.right/0.0.1536.824/-1920.0.1920.1040@0.0.1536.824" timestamp="1592935413301" />
+    <state width="1493" height="260" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1536.824@1920.0.1536.824" timestamp="1593097348018" />
+    <state width="2345" height="388" key="GridCell.Tab.0.right/0.23.3200.1777@0.23.3200.1777" timestamp="1586707822025" />
+    <state width="1493" height="260" key="GridCell.Tab.1.bottom" timestamp="1593097348019">
+      <screen x="1920" y="0" width="1536" height="824" />
+    </state>
+    <state width="1877" height="347" key="GridCell.Tab.1.bottom/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1592976087021" />
+    <state width="1493" height="260" key="GridCell.Tab.1.bottom/0.0.1536.824/1920.0.1536.824@1920.0.1536.824" timestamp="1593097348019" />
+    <state width="2654" height="645" key="GridCell.Tab.1.bottom/0.23.3200.1777@0.23.3200.1777" timestamp="1586288825319" />
+    <state width="1493" height="260" key="GridCell.Tab.1.center" timestamp="1593097348018">
+      <screen x="1920" y="0" width="1536" height="824" />
+    </state>
+    <state width="1877" height="347" key="GridCell.Tab.1.center/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1592976087021" />
+    <state width="1493" height="260" key="GridCell.Tab.1.center/0.0.1536.824/1920.0.1536.824@1920.0.1536.824" timestamp="1593097348018" />
+    <state width="2654" height="645" key="GridCell.Tab.1.center/0.23.3200.1777@0.23.3200.1777" timestamp="1586288825318" />
+    <state width="1493" height="260" key="GridCell.Tab.1.left" timestamp="1593097348018">
+      <screen x="1920" y="0" width="1536" height="824" />
+    </state>
+    <state width="1877" height="347" key="GridCell.Tab.1.left/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1592976087021" />
+    <state width="1493" height="260" key="GridCell.Tab.1.left/0.0.1536.824/1920.0.1536.824@1920.0.1536.824" timestamp="1593097348018" />
+    <state width="2654" height="645" key="GridCell.Tab.1.left/0.23.3200.1777@0.23.3200.1777" timestamp="1586288825317" />
+    <state width="1493" height="260" key="GridCell.Tab.1.right" timestamp="1593097348018">
+      <screen x="1920" y="0" width="1536" height="824" />
+    </state>
+    <state width="1877" height="347" key="GridCell.Tab.1.right/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1592976087021" />
+    <state width="1493" height="260" key="GridCell.Tab.1.right/0.0.1536.824/1920.0.1536.824@1920.0.1536.824" timestamp="1593097348018" />
+    <state width="2654" height="645" key="GridCell.Tab.1.right/0.23.3200.1777@0.23.3200.1777" timestamp="1586288825318" />
+    <state x="498" y="0" key="SettingsEditor" timestamp="1588778430929">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="498" y="0" key="SettingsEditor/0.0.1536.824/1920.0.1536.824@0.0.1536.824" timestamp="1588778430929" />
+    <state x="1642" y="550" key="SettingsEditor/0.23.3200.1777@0.23.3200.1777" timestamp="1586163162363" />
+    <state x="210" y="214" key="com.intellij.ide.util.TipDialog" timestamp="1586731418183">
+      <screen x="0" y="0" width="1280" height="800" />
+    </state>
+    <state x="210" y="214" key="com.intellij.ide.util.TipDialog/0.0.1280.800@0.0.1280.800" timestamp="1586731418183" />
+    <state x="525" y="499" key="com.intellij.ide.util.TipDialog/0.23.3200.1777@0.23.3200.1777" timestamp="1586679760030" />
+    <state x="2418" y="304" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1593057919177">
+      <screen x="1920" y="0" width="1536" height="824" />
+    </state>
+    <state x="2418" y="304" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1536.824/1920.0.1536.824@1920.0.1536.824" timestamp="1593057919177" />
+    <state x="2460" y="159" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1593057937879">
+      <screen x="1920" y="0" width="1536" height="824" />
+    </state>
+    <state x="2460" y="159" key="com.intellij.testIntegration.createTest.CreateTestDialog/0.0.1536.824/1920.0.1536.824@1920.0.1536.824" timestamp="1593057937879" />
+    <state x="-1253" y="119" width="585" height="801" key="find.popup" timestamp="1592940454932">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1253" y="119" width="585" height="801" key="find.popup/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1592940454932" />
+    <state x="-1578" y="140" key="new project wizard" timestamp="1592975842806">
+      <screen x="-1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="-1578" y="140" key="new project wizard/0.0.1536.824/-1920.0.1920.1040@-1920.0.1920.1040" timestamp="1592975842806" />
+    <state x="1896" y="535" key="refactoring.ChangeSignatureDialog" timestamp="1586603140284">
+      <screen x="0" y="23" width="3200" height="1777" />
+    </state>
+    <state x="1896" y="535" key="refactoring.ChangeSignatureDialog/0.23.3200.1777@0.23.3200.1777" timestamp="1586603140284" />
+    <state x="2345" y="187" key="run.anything.popup" timestamp="1593062088228">
+      <screen x="1920" y="0" width="1536" height="824" />
+    </state>
+    <state x="2345" y="187" key="run.anything.popup/0.0.1536.824/1920.0.1536.824@1920.0.1536.824" timestamp="1593062088228" />
+    <state x="2286" y="128" width="672" height="314" key="search.everywhere.popup" timestamp="1593091046297">
+      <screen x="1920" y="0" width="1536" height="824" />
+    </state>
+    <state x="2286" y="128" width="672" height="314" key="search.everywhere.popup/0.0.1536.824/1920.0.1536.824@1920.0.1536.824" timestamp="1593091046297" />
+    <state x="763" y="298" width="670" height="676" key="search.everywhere.popup/0.23.3200.1777@0.23.3200.1777" timestamp="1586685473230" />
+  </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/moving_rectangle_folder_animation$GuiStart.ic" NAME="GuiStart Coverage Results" MODIFIED="1592960807116" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>pt.ipbeja.po2.contagious.gui.*</FILTER>
+    </SUITE>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/test/pt/ipbeja/po2/contagious/model/WorldTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="28" selection-start-line="2" selection-start-column="28" selection-end-line="2" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pt/ipbeja/po2/contagious/model/ImmunePerson.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pt/ipbeja/po2/contagious/gui/GuiStart.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="56">
+          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pt/ipbeja/po2/contagious/model/View.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="17" selection-start-line="2" selection-start-column="17" selection-end-line="2" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pt/ipbeja/po2/contagious/model/SickPerson.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pt/ipbeja/po2/contagious/model/Cell.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pt/ipbeja/po2/contagious/gui/ContagiousBoard.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="131" column="20" lean-forward="true" selection-start-line="131" selection-start-column="20" selection-end-line="131" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pt/ipbeja/po2/contagious/model/CellPosition.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pt/ipbeja/po2/contagious/model/HealthyPerson.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pt/ipbeja/po2/contagious/model/EmptyCell.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pt/ipbeja/po2/contagious/model/Person.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-172">
+          <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pt/ipbeja/po2/contagious/gui/SetupData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pt/ipbeja/po2/contagious/gui/SetupDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-114">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/pt/ipbeja/po2/contagious/gui/WorldBoard.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-98">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
