@@ -103,5 +103,4 @@ class WorldTest {
         assertFalse(this.world.getCell(5, 3).isSick());
         assertFalse(this.world.getCell(4, 4).isSick());
     }
-
 }

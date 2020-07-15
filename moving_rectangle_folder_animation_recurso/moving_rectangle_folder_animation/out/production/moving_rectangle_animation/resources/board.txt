@@ -1,0 +1,8 @@
+50
+50
+healthy
+2 3
+immune
+10 10
+sick
+1 1
