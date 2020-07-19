@@ -6,12 +6,13 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class GuiStart extends Application {
-
+    private static String[] cmdInput;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        ContagiousBoard board = new ContagiousBoard();
+
+        ContagiousBoard board = new ContagiousBoard(this.cmdInput);
         Scene scene = new Scene(board);
 
         primaryStage.setScene(scene);
@@ -23,7 +24,7 @@ public class GuiStart extends Application {
     }
 
     public static void main(String args[]) {
-        System.out.println(args.length);
+        cmdInput = args;
         Application.launch(args);
     }
 }

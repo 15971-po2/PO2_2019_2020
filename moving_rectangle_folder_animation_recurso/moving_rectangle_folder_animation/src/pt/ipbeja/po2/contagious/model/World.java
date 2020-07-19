@@ -19,9 +19,9 @@ public class World {
     private int nHealthyPersons;
     private int nSickPersons;
     private int nImmunePersons;
-    private final int nPersons;
-    private final int speed;
-    private final int directions;
+    private int nPersons;
+    private int speed;
+    private int directions;
 
     private Thread simulate;
 
@@ -225,7 +225,7 @@ public class World {
             for (int col = 0; col < this.nCols; col++) {
                 Cell cell = this.cells[line][col];
                 CellPosition position = new CellPosition(line, col);
-                if (!cell.isEmpty() && this.checkInfection(position)) {
+                if (cell.isHealthy() && this.checkInfection(position)) {
                     this.cells[line][col] = new SickPerson(position, iterationsToHeal);
                     this.nSickPersons++;
                     this.nHealthyPersons--;
@@ -386,11 +386,11 @@ public class World {
     private void simulate(int nIter) {
         for (int i = 0; i < nIter; i++) {
             try {
-                Thread.sleep(400);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            this.move(nIter);
+            this.move(i);
         }
     }
 
@@ -398,7 +398,9 @@ public class World {
      * Read data from text file
      * @param filePath
      */
-    public void readFile(String filePath) {
+    public void readFile(String filePath, int speed, int directions) {
+        this.speed = speed;
+        this.directions = directions;
         this.fileData = new ArrayList<>();
         try {
             File f = new File(filePath);
@@ -420,6 +422,9 @@ public class World {
      */
     private void fillFromData() {
         if (this.fileData.size() > 4) {
+            this.nHealthyPersons = 0;
+            this.nImmunePersons = 0;
+            this.nSickPersons = 0;
             this.nLines = Integer.parseInt(this.fileData.get(0));
             this.nCols = Integer.parseInt(this.fileData.get(1));
             this.cells = new Cell[this.nLines][this.nCols];
@@ -440,6 +445,7 @@ public class World {
                                 if (this.fileData.get(cell).matches(".*\\d.*")) {
                                     String[] splitted = this.fileData.get(cell).split(" ");
                                     this.createHealthyPerson(Integer.valueOf(splitted[0]), Integer.valueOf(splitted[1]));
+                                    this.nHealthyPersons++;
                                 } else {
                                     break;
                                 }
@@ -450,6 +456,7 @@ public class World {
                                 if (this.fileData.get(cell).matches(".*\\d.*")) {
                                     String[] splitted = this.fileData.get(cell).split(" ");
                                     this.createImmunePerson(Integer.parseInt(splitted[0]), Integer.parseInt(splitted[1]));
+                                    this.nImmunePersons++;
                                 } else {
                                     break;
                                 }
@@ -460,6 +467,7 @@ public class World {
                                 if (this.fileData.get(cell).matches(".*\\d.*")) {
                                     String[] splitted = this.fileData.get(cell).split(" ");
                                     this.createSickPerson(Integer.parseInt(splitted[0]), Integer.parseInt(splitted[1]));
+                                    this.nSickPersons++;
                                 } else {
                                     break;
                                 }
@@ -537,5 +545,22 @@ public class World {
                 }
             }
         }
+    }
+
+    public void readFile(String filePath) {
+        this.fileData = new ArrayList<>();
+        try {
+            File f = new File(filePath);
+            Scanner sc = new Scanner(f);
+
+            while (sc.hasNextLine()) {
+                String line = sc.nextLine();
+                fileData.add(line);
+            }
+        }
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        this.fillFromData();
     }
 }
