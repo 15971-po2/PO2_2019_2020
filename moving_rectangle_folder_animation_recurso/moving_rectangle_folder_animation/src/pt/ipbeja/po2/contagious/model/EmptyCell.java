@@ -1,6 +1,11 @@
 package pt.ipbeja.po2.contagious.model;
 
 public class EmptyCell extends Cell {
+
+    /**
+     * Constructor
+     * @param cellPosition - position to create empty cell
+     */
     public EmptyCell(CellPosition cellPosition) {
         super(cellPosition);
     }

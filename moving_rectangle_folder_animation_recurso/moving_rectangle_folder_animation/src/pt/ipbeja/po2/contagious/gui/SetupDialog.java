@@ -10,11 +10,10 @@ import javafx.scene.layout.GridPane;
 public class SetupDialog extends Dialog<SetupData> {
     private ButtonType okButton = new ButtonType("OK", ButtonBar.ButtonData.OK_DONE);
     private ButtonType cancelButton = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
-    private int nHealthy;
-    private int nSick;
-    private int speed;
-    private int directions;
 
+    /**
+     * Constructor to setup the dialog
+     */
     public SetupDialog() {
         this.setTitle("New Contagious Settings");
         this.setHeaderText(null);

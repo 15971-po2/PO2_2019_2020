@@ -2,6 +2,10 @@ package pt.ipbeja.po2.contagious.model;
 
 public class HealthyPerson extends Person {
 
+    /**
+     * Constructor
+     * @param cellPosition - position to create healthy person
+     */
     public HealthyPerson(CellPosition cellPosition) {
         super(cellPosition);
     }

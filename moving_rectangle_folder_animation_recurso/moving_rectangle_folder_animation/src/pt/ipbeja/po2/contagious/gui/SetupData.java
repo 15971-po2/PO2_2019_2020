@@ -7,6 +7,14 @@ public class SetupData {
     private int directions;
     private int nImmune;
 
+    /**
+     * Constructor
+     * @param nHealthy - number of healthy persons
+     * @param nSick - number of sick persons
+     * @param nImmune - number of immune persons
+     * @param speed - speed per iteration
+     * @param directions - should change more directions or not
+     */
     public SetupData(int nHealthy, int nSick,int nImmune, int speed, int directions) {
         this.nHealthy = nHealthy;
         this.nSick = nSick;

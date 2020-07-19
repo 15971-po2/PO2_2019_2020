@@ -27,7 +27,17 @@ public class World {
 
     private List<String> fileData;
 
-
+    /**
+     * Constructor
+     * @param view - view instance
+     * @param nLines - number of lines
+     * @param nCols - number of cols
+     * @param nHealthyPersons - number of healthy persons
+     * @param nSickPersons - number of sick persons
+     * @param nImmunePersons - number of immune persons
+     * @param speed - speed input
+     * @param directions - directions input
+     */
     public World(View view, int nLines, int nCols,
                  int nHealthyPersons, int nSickPersons, int nImmunePersons, int speed, int directions) {
         this.view = view;
@@ -180,6 +190,7 @@ public class World {
 
     /**
      * Move people
+     * @param iteration - iteration no
      */
     private void move(int iteration) {
         int people = 0;
@@ -192,7 +203,7 @@ public class World {
                 int oldCol = cell.getCol();
                 if (!cell.isEmpty() && people < peopleToMove) {
                     CellPosition position = new CellPosition(oldLine, oldCol);
-                    CellPosition newPosition = cell.randomMove(this.speed);
+                    CellPosition newPosition = cell.randomMove(this.speed, this.directions);
                     int newLine = newPosition.getLine();
                     int newCol = newPosition.getCol();
                     this.cells[oldLine][oldCol] = new EmptyCell(position);
@@ -284,6 +295,12 @@ public class World {
         return isInfected;
     }
 
+    /**
+     * Get cell
+     * @param line - line to get cell
+     * @param col - col to get cell
+     * @return - cell
+     */
     public static Cell getCell(int line, int col) {
         return cells[line][col];
     }
@@ -377,6 +394,7 @@ public class World {
      * Stop contagious movement thread
      */
     public void stop() {
+        this.view.newChart();
         this.simulate.stop();
     }
 
@@ -395,8 +413,10 @@ public class World {
     }
 
     /**
-     * Read data from text file
-     * @param filePath
+     * Read data from filepath
+     * @param filePath - path to read
+     * @param speed - speed input
+     * @param directions - directions input
      */
     public void readFile(String filePath, int speed, int directions) {
         this.speed = speed;
@@ -525,6 +545,9 @@ public class World {
         }
     }
 
+    /**
+     * Update iterations to heal persons
+     */
     private void updateIterationsToHeal() {
         for (int line = 0; line < this.nLines; line++) {
             for (int col = 0; col < this.nCols; col++) {
@@ -547,6 +570,10 @@ public class World {
         }
     }
 
+    /**
+     * Read data from filepath
+     * @param filePath - path to read
+     */
     public void readFile(String filePath) {
         this.fileData = new ArrayList<>();
         try {

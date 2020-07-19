@@ -1,7 +1,6 @@
 package pt.ipbeja.po2.contagious.gui;
 
 import javafx.application.Platform;
-import javafx.scene.chart.XYChart;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
@@ -17,6 +16,11 @@ public class WorldBoard extends Pane {
     private final int nColsPane;
     private Rectangle[][] rectangles;
 
+    /**
+     * Constructor
+     * @param world - world instance
+     * @param size - world size
+     */
     public WorldBoard(World world, int size) {
         this.world = world;
         this.CELL_SIZE = size;

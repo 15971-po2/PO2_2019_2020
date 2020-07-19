@@ -4,8 +4,12 @@ import javafx.application.Platform;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.*;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import pt.ipbeja.po2.contagious.model.CellPosition;
 import pt.ipbeja.po2.contagious.model.View;
@@ -14,7 +18,7 @@ import pt.ipbeja.po2.contagious.model.World;
 import java.io.File;
 import java.util.Optional;
 
-public class ContagiousBoard extends VBox implements View {
+public class ContagiousBoard extends HBox implements View {
     public static World world;
     private WorldBoard pane;
     private Label counterLabel;
@@ -28,8 +32,9 @@ public class ContagiousBoard extends VBox implements View {
     private int directions;
     private int mode;
 
-    private final NumberAxis xAxis = new NumberAxis();
-    private final NumberAxis yAxis = new NumberAxis();
+    // Line Chart
+    private NumberAxis xAxis = new NumberAxis();
+    private NumberAxis yAxis = new NumberAxis();
     private LineChart<Number,Number> lineChart;
     private XYChart.Series<Number, Number> healthy;
     private XYChart.Series<Number, Number> sick;
@@ -39,6 +44,10 @@ public class ContagiousBoard extends VBox implements View {
 
     private MenuBar menuBar;
 
+    /**
+     * Constructor
+     * @param args - command line arguments
+     */
     public ContagiousBoard(String args[]) {
 
         this.mode = 0;
@@ -117,7 +126,7 @@ public class ContagiousBoard extends VBox implements View {
                 this.pane = new WorldBoard(this.world, 10);
                 this.getChildren().clear();
                 this.getChildren().addAll(this.menuBar, this.pane);
-                this.setupChart();
+                this.newChart();
                 this.getScene().getWindow().sizeToScene();
             } else if (this.mode == 2) {
                 this.world.readFile(this.path,this.speed, this.directions);
@@ -125,7 +134,7 @@ public class ContagiousBoard extends VBox implements View {
                 this.pane = new WorldBoard(this.world, 10);
                 this.getChildren().clear();
                 this.getChildren().addAll(this.menuBar, this.pane);
-                this.setupChart();
+                this.newChart();
                 this.getScene().getWindow().sizeToScene();
             } else if (this.mode == 3) {
                 this.world = new World(this, 50, 50,
@@ -134,7 +143,7 @@ public class ContagiousBoard extends VBox implements View {
                 this.pane = new WorldBoard(this.world, 10);
                 this.getChildren().clear();
                 this.getChildren().addAll(this.menuBar, this.pane);
-                this.setupChart();
+                this.newChart();
                 this.getScene().getWindow().sizeToScene();
             }
         });
@@ -144,14 +153,14 @@ public class ContagiousBoard extends VBox implements View {
      * Handle start action
      */
     private void start() {
-        world.start();
+        this.world.start();
     }
 
     /**
      * Handle stop action
      */
     private void stop() {
-        world.stop();
+        this.world.stop();
     }
 
     /**
@@ -173,7 +182,7 @@ public class ContagiousBoard extends VBox implements View {
         this.pane = new WorldBoard(this.world, 10);
         this.getChildren().clear();
         this.getChildren().addAll(this.menuBar, this.pane);
-        this.setupChart();
+        this.newChart();
         this.getScene().getWindow().sizeToScene();
     }
 
@@ -220,13 +229,20 @@ public class ContagiousBoard extends VBox implements View {
     @Override
     public void updatePosition(CellPosition position, CellPosition newPosition) {
         Platform.runLater( () -> {
-            pane.updatePosition(position, newPosition);
+            this.pane.updatePosition(position, newPosition);
         });
     }
 
+    /**
+     * Setup Line Chart
+     */
     private void setupChart() {
+        this.xAxis = new NumberAxis();
+        this.yAxis = new NumberAxis();
+
         this.xAxis.setLabel("Iteration no");
         this.xAxis.setAnimated(false);
+
         this.yAxis.setLabel("Count");
         this.yAxis.setAnimated(false);
 
@@ -234,8 +250,8 @@ public class ContagiousBoard extends VBox implements View {
         this.lineChart.setTitle("Pandemic evolution");
         this.lineChart.setAnimated(false);
 
+
         this.healthy = new XYChart.Series<>();
-        //this.healthy.getNode().lookup("healhy.chart-series-line").setStyle("-fx-stroke: #0033cc");
         this.healthy.setName("Healthy people");
         this.healthy.getData().add(new XYChart.Data(0, this.nHealthy));
 
@@ -252,20 +268,34 @@ public class ContagiousBoard extends VBox implements View {
         this.getChildren().add(this.lineChart);
     }
 
+    /**
+     * Update Line Chart with new data
+     * @param iteration - x value
+     * @param healthy - number of healthy persons
+     * @param sick - number of sick persons
+     * @param immune - number of immune persons
+     */
     public void updateChart(int iteration, int healthy, int sick, int immune) {
-        System.out.println(iteration + " " + healthy + " " + sick + " " + immune);
         Platform.runLater(() -> {
             this.healthy.getData().add(new XYChart.Data<>(iteration, healthy));
             this.sick.getData().add(new XYChart.Data<>(iteration, sick));
             this.immune.getData().add(new XYChart.Data<>(iteration, immune));
-            System.out.println(this.lineChart.getWidth());
             if (this.healthy.getData().size() > WINDOW_SIZE) {
                 this.healthy.getData().remove(0);
                 this.sick.getData().remove(0);
                 this.immune.getData().remove(0);
-                xAxis.setLowerBound(xAxis.getLowerBound() - 1);
-                xAxis.setUpperBound(xAxis.getUpperBound() - 1);
+                this.xAxis.setAutoRanging(false);
+                this.xAxis.setLowerBound(this.xAxis.getLowerBound() + 1);
+                this.xAxis.setUpperBound(this.xAxis.getUpperBound() + 1);
             }
         });
+    }
+
+    /**
+     * Delete old line chart and create a new one
+     */
+    public void newChart() {
+        this.getChildren().remove(this.lineChart);
+        this.setupChart();
     }
 }

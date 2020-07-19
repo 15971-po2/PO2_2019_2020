@@ -5,21 +5,38 @@ public abstract class Cell {
     private int line;
     private int col;
 
+    /**
+     * Constructor
+     * @param cellPosition - position to create cell
+     */
     public Cell(CellPosition cellPosition) {
         this.cellPosition = cellPosition;
         this.line = cellPosition.getLine();
         this.col = cellPosition.getCol();
     }
 
+    /**
+     * Get current position
+     * @return - current position
+     */
     public CellPosition cellPosition() {
         return this.cellPosition;
     }
 
-    public CellPosition randomMove(int speed) {
-        final int[] v = {-1, 0, 1};
+    /**
+     * Randomly move cell
+     * @param speed - speed input
+     * @param directions - direction change input
+     * @return - new position
+     */
+    public CellPosition randomMove(int speed, int directions) {
+        int[] v = {-1, 0, 1};
         boolean valid = false;
+        if (directions == 1) {
+            v = new int[] {-1, 1, 1};
+        }
         while(!valid) {
-            int lineMove = v[World.rand.nextInt(3)] * speed;
+            int lineMove = (v[World.rand.nextInt(3)] * speed);
             int colMove = v[World.rand.nextInt(3)] * speed;
             if (lineMove == 0 && colMove == 0) {// to force a move
                 lineMove = 1;
@@ -36,17 +53,25 @@ public abstract class Cell {
         return this.cellPosition;
     }
 
+    /**
+     * Get current line
+     * @return - current line
+     */
     public int getLine() {
         return this.line;
     }
 
+    /**
+     * Get current col
+     * @return - current col
+     */
     public int getCol() {
         return this.col;
     }
 
     /**
-     *
-     * @return
+     * Convert cell to string
+     * @return - cell in string format
      */
     @Override
     public String toString() {

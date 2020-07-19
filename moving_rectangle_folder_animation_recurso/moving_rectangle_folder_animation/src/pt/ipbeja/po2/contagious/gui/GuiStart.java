@@ -1,6 +1,5 @@
 package pt.ipbeja.po2.contagious.gui;
 
-
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -10,8 +9,6 @@ public class GuiStart extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
-
         ContagiousBoard board = new ContagiousBoard(this.cmdInput);
         Scene scene = new Scene(board);
 
